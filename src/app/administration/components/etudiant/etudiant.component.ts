@@ -7,7 +7,7 @@ import { EtudiantService } from 'src/app/services/etudiant.service';
   styleUrls: ['./etudiant.component.scss']
 })
 export class EtudiantComponent implements OnInit {
-
+  etudiants: any
   constructor(private etudiantService: EtudiantService) { }
 
   ngOnInit(): void {
@@ -15,9 +15,10 @@ export class EtudiantComponent implements OnInit {
   }
   getEtudiant() {
     this.etudiantService.getEtudiant().subscribe(
-      data => {
+      (data) => {
         console.log(data)
-        console.log("ok cela marche")
+        console.log(data)
+        this.etudiants =data
       },
       (error) => console.log(error)
    )
