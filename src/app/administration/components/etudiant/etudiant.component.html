@@ -1,0 +1,100 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Static Tables</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Tables</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Static Tables</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Custom responsive table </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-2 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
+                            <option value="0">BTS </option>
+                            <option value="1">Licence 3</option>
+                            <option value="2">Master 2</option>
+                            <option value="3"> These</option>
+                        </select>
+                        </div>
+                        <div class="col-sm-2 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
+                            <option value="0">Promotion 1</option>
+                            <option value="1">Promotion 2</option>
+                            <option value="2">Promotion 3</option>
+                            <option value="3">Promotion 4</option>
+                        </select>
+                        </div>
+                        <div class="col-sm-2 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
+                            <option value="0">Classe 1</option>
+                            <option value="1">Classe 2</option>
+                            <option value="2">Classe 3</option>
+                            <option value="3">Classe 4</option>
+                        </select>
+                        </div>
+                        <div class="col-sm-2 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
+                            <option value="0">Filiere 1</option>
+                            <option value="1">Filiere 2</option>
+                            <option value="2">Filiere 3</option>
+                            <option value="3">Filiere 4</option>
+                        </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group"><input placeholder="Search" type="text" class="form-control form-control-sm"> <span class="input-group-append"> <button type="button" class="btn btn-sm btn-primary">Go!
+                            </button> </span></div>
+
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>INE</th>
+                                    <th>Prenom </th>
+                                    <th>Nom </th>
+                                    <th>Telephon</th>
+                                    <th>Email</th>
+                                    <th>Promotion</th>
+                                    <th>Specialite</th>
+                                    <th>Niveau</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let etudiant of etudiants">
+                                    <td>{{etudiant.ine}} </td>
+                                    <td>{{etudiant.prenom}}</td>
+                                    <td>{{etudiant.nom}}</td>
+                                    <td>{{etudiant.telephon}}</td>
+                                    <td>{{etudiant.email}}</td>
+                                    <td>{{etudiant.promotion.code}}</td>
+                                    <td>{{etudiant.classe.specialite.nom}}</td>
+                                    <td>{{etudiant.classe.specialite.niveau}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
