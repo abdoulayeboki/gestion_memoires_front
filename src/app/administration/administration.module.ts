@@ -7,16 +7,31 @@ import { DepartementComponent } from './components/departement/departement.compo
 import { FiliereComponent } from './components/filiere/filiere.component';
 import { SpecialiteComponent } from './components/specialite/specialite.component';
 import { EtudiantService } from './services/etudiant.service';
+import { ClasseComponent } from './components/classe/classe.component';
+import { EnseignentService } from './services/enseignent.service';
+import { DepartementService } from './services/departement.service';
+import { FiliereService } from './services/filiere.service';
+import { SpecialiteService } from './services/specialite.service';
+import { ClasseService } from './services/classe.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [EtudiantComponent, EnseignentComponent, DepartementComponent, FiliereComponent, SpecialiteComponent],
+  declarations: [
+    EtudiantComponent, EnseignentComponent, DepartementComponent, FiliereComponent,
+    SpecialiteComponent, ClasseComponent],
   imports: [
     CommonModule,
     AdministrationRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [
-    EtudiantService
+    EtudiantService,
+    EnseignentService,
+    DepartementService,
+    FiliereService,
+    SpecialiteService,
+    ClasseService,
   ]
 })
 export class AdministrationModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpecialiteService } from '../../services/specialite.service';
 
 @Component({
   selector: 'app-specialite',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpecialiteComponent implements OnInit {
 
-  constructor() { }
+  specialites: any
+  constructor(private specialiteService: SpecialiteService) { }
 
   ngOnInit(): void {
+    this.getSpecialites()
   }
-
+  getSpecialites() {
+    this.specialiteService.getSpecialites().subscribe(
+      (data) => {
+        console.log(data)
+        this.specialites =data
+      },
+      (error) => console.log(error)
+   )
+  }
 }

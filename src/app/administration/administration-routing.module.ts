@@ -5,6 +5,7 @@ import { EnseignentComponent } from './components/enseignent/enseignent.componen
 import { DepartementComponent } from './components/departement/departement.component';
 import { FiliereComponent } from './components/filiere/filiere.component';
 import { SpecialiteComponent } from './components/specialite/specialite.component';
+import { ClasseComponent } from './components/classe/classe.component';
 
 const routes: Routes = [
   { path: "etudiants", component: EtudiantComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: "departements", component: DepartementComponent },
   { path: "filieres", component: FiliereComponent },
   { path: "specialites", component: SpecialiteComponent },
+  { path: "classes", component: ClasseComponent },
 ];
 
 @NgModule({

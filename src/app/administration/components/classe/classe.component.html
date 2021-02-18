@@ -46,26 +46,16 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>CNI</th>
-                                    <th>Prenom </th>
-                                    <th>Nom </th>
-                                    <th>Telephon</th>
-                                    <th>Email</th>
-                                    <th>Grade</th>
+                                    <th>Code</th>
                                     <th>Specialite</th>
-                                    <th>Departement</th>
+                                    <th>Annee Scolaire</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let enseignent of enseignents">
-                                    <td>{{enseignent.cni}} </td>
-                                    <td>{{enseignent.prenom}}</td>
-                                    <td>{{enseignent.nom}}</td>
-                                    <td>{{enseignent.telephon}}</td>
-                                    <td>{{enseignent.email}}</td>
-                                    <td>{{enseignent.grade}}</td>
-                                    <td>{{enseignent.specialite}}</td>
-                                    <td><a [routerLink]="['/departements']">{{enseignent.departement.code}}</a></td>
+                                <tr *ngFor="let classe of classes">
+                                    <td>{{classe.code}} </td>
+                                    <td><a [routerLink]="['/specialites']">{{classe.specialite.nom}} </a></td>
+                                    <td>{{classe.anneeScolaire}}</td>
                                 </tr>
                             </tbody>
                         </table>

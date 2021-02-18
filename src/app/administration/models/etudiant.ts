@@ -1,3 +1,5 @@
+import { Classe } from './classe';
+import { Promotion } from './promotion';
 export interface Etudiant {
   id?: number;
   prenom: string;
@@ -5,6 +7,6 @@ export interface Etudiant {
   ine: string;
   email: string;
   telephon: string;
-  promotion?: any;
-  classe?: any
+  promotion: Promotion;
+  classe: Classe
 }

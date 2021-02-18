@@ -28,36 +28,28 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-2 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
-                            <option value="0">BTS </option>
-                            <option value="1">Licence 3</option>
-                            <option value="2">Master 2</option>
-                            <option value="3"> These</option>
+                        <div class="col-sm-3 m-b-xs">
+                            <select #n (change)="getEtudiantsByNiveau(n.value)" class="form-control-sm form-control input-s-sm inline">
+                            <option value="">Tous les niveaux </option>
+                            <option *ngFor="let niveau of niveaux" value="{{niveau.code}}" >{{niveau.nom}} </option>
                         </select>
                         </div>
-                        <div class="col-sm-2 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
-                            <option value="0">Promotion 1</option>
-                            <option value="1">Promotion 2</option>
-                            <option value="2">Promotion 3</option>
-                            <option value="3">Promotion 4</option>
+                        <div class="col-sm-3 m-b-xs">
+                            <select #p (change)="this.getEtudiantsByPromotion(p.value)" class="form-control-sm form-control input-s-sm inline">
+                                <option value="">Toutes les Promotions </option>
+                                <option *ngFor="let promotion of promotions" value={{promotion.code}}>{{promotion.code}} </option>
                         </select>
                         </div>
-                        <div class="col-sm-2 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
-                            <option value="0">Classe 1</option>
-                            <option value="1">Classe 2</option>
-                            <option value="2">Classe 3</option>
-                            <option value="3">Classe 4</option>
-                        </select>
-                        </div>
-                        <div class="col-sm-2 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
-                            <option value="0">Filiere 1</option>
-                            <option value="1">Filiere 2</option>
-                            <option value="2">Filiere 3</option>
-                            <option value="3">Filiere 4</option>
+                        <div class="col-sm-3 m-b-xs">
+                            <select #c (change)="this.getEtudiantsByClasse(c.value)" class="form-control-sm form-control input-s-sm inline">
+                                <option value="">Toutes les Classe </option>
+                                <option *ngFor="let classe of classes" value={{classe.code}}>{{classe.code}} </option>
                         </select>
                         </div>
                         <div class="col-sm-3">
-                            <div class="input-group"><input placeholder="Search" type="text" class="form-control form-control-sm"> <span class="input-group-append"> <button type="button" class="btn btn-sm btn-primary">Go!
+                            <div class="input-group"><input placeholder="Search By Prenom, Nom , INE" [formControl]="search" type="text" class="form-control form-control-sm">
+                                <span class="input-group-append"> 
+                            <button (click)="getEtudiantBySearch()" class="btn btn-sm btn-primary">Go!
                             </button> </span></div>
 
                         </div>
@@ -66,13 +58,13 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-
                                     <th>INE</th>
                                     <th>Prenom </th>
                                     <th>Nom </th>
                                     <th>Telephon</th>
                                     <th>Email</th>
                                     <th>Promotion</th>
+                                    <th>Code Classe</th>
                                     <th>Specialite</th>
                                     <th>Niveau</th>
                                 </tr>
@@ -85,7 +77,8 @@
                                     <td>{{etudiant.telephon}}</td>
                                     <td>{{etudiant.email}}</td>
                                     <td>{{etudiant.promotion.code}}</td>
-                                    <td>{{etudiant.classe.specialite.nom}}</td>
+                                    <td>{{etudiant.classe.code}}</td>
+                                    <td><a [routerLink]="['/specialites']">{{etudiant.classe.specialite.nom}}</a></td>
                                     <td>{{etudiant.classe.specialite.niveau}}</td>
                                 </tr>
                             </tbody>

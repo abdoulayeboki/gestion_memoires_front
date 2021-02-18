@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EnseignentService } from '../../services/enseignent.service';
 
 @Component({
   selector: 'app-enseignent',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./enseignent.component.scss']
 })
 export class EnseignentComponent implements OnInit {
-
-  constructor() { }
+  enseignents: any
+  constructor(private enseignentService: EnseignentService) { }
 
   ngOnInit(): void {
+    this.getEnseignents()
+  }
+  getEnseignents() {
+    this.enseignentService.getEnseignents().subscribe(
+      (data) => {
+        console.log(data)
+        this.enseignents =data
+      },
+      (error) => console.log(error)
+   )
   }
 
 }
