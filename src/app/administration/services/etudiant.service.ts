@@ -10,10 +10,7 @@ export class EtudiantService {
   constructor(private http: HttpClient) {
   }
 
-  getEtudiants():Observable<any> {
-    return this.http.get(`${environment.apiUrl}/administration/etudiants`)
-  }
-  getEtudiantBySearch(search: string):Observable<any> {
+  getEtudiants(search: string=""):Observable<any> {
     return this.http.get(`${environment.apiUrl}/administration/etudiants?search=${search}`)
   }
 }

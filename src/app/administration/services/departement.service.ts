@@ -11,7 +11,7 @@ export class DepartementService {
   constructor(private http: HttpClient) {
   }
 
-  getDepartements():Observable<any> {
-    return this.http.get(`${environment.apiUrl}/administration/departements`)
+  getDepartements(search:string=""):Observable<any> {
+    return this.http.get(`${environment.apiUrl}/administration/departements?search=${search}`)
   }
 }

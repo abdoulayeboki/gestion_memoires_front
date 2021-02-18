@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartementService } from '../../services/departement.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-departement',
@@ -8,13 +9,14 @@ import { DepartementService } from '../../services/departement.service';
 })
 export class DepartementComponent implements OnInit {
   departements: any
+  search = new FormControl('');
   constructor(private departementService: DepartementService) { }
 
   ngOnInit(): void {
     this.getDepartements()
   }
   getDepartements() {
-    this.departementService.getDepartements().subscribe(
+    this.departementService.getDepartements(this.search.value).subscribe(
       (data) => {
         console.log(data)
         this.departements =data

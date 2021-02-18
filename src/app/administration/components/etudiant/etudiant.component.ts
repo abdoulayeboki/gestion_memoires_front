@@ -42,7 +42,7 @@ export class EtudiantComponent implements OnInit {
     this.getPromotions()
   }
   getEtudiants() {
-    this.etudiantService.getEtudiants().subscribe(
+    this.etudiantService.getEtudiants(this.search.value).subscribe(
       (data) => {
         console.log(data)
         this.etudiants =data
@@ -196,14 +196,4 @@ export class EtudiantComponent implements OnInit {
    )
   }
   
-  getEtudiantBySearch() {
-    console.log(this.search.value)
-    this.etudiantService.getEtudiantBySearch(this.search.value).subscribe(
-      (data) => {
-        console.log(data)
-        this.etudiants =data
-      },
-      (error) => console.log(error)
-   )
-  }
 }

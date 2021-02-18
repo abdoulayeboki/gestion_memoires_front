@@ -11,7 +11,14 @@ export class SpecialiteService {
   constructor(private http: HttpClient) {
   }
 
-  getSpecialites():Observable<any> {
-    return this.http.get(`${environment.apiUrl}/administration/specialites`)
+  getSpecialites(search:string=""):Observable<any> {
+    return this.http.get(`${environment.apiUrl}/administration/specialites?search=${search}`)
+  }
+
+  getSpecialiteByFiliere(idFiliere: number): Observable<any> {
+    if(idFiliere)
+      return this.http.get(`${environment.apiUrl}/administration/specialites?filiere=${idFiliere}`)
+    else
+      return this.http.get(`${environment.apiUrl}/administration/specialites`)
   }
 }

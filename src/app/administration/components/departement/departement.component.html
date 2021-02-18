@@ -28,16 +28,10 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-5 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
-                            <option value="0">Departement </option>
-                            <option value="1">Departement 3</option>
-                            <option value="2">Departement 2</option>
-                            <option value="3"> Departement 5</option>
-                        </select>
-                        </div>
 
                         <div class="col-sm-5">
-                            <div class="input-group"><input placeholder="Search" type="text" class="form-control form-control-sm"> <span class="input-group-append"> <button type="button" class="btn btn-sm btn-primary">Go!
+                            <div class="input-group"><input placeholder="Search By nom, code" type="text" [formControl]="search" class="form-control form-control-sm"> <span class="input-group-append">
+                                      <button type="button" (click)="getDepartements()" class="btn btn-sm btn-primary">Go!
                             </button> </span></div>
 
                         </div>

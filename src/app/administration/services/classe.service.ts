@@ -11,7 +11,13 @@ export class ClasseService {
   constructor(private http: HttpClient) {
   }
 
-  getClasses():Observable<any> {
-    return this.http.get(`${environment.apiUrl}/administration/classes`)
+  getClasses(search: string=""): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/administration/classes?search=${search}`)
+  }
+  getClasseByFiliere(idFiliere: number): Observable<any> {
+    if(idFiliere)
+      return this.http.get(`${environment.apiUrl}/administration/classes?specialite__filiere=${idFiliere}`)
+    else
+      return this.http.get(`${environment.apiUrl}/administration/classes`)
   }
 }

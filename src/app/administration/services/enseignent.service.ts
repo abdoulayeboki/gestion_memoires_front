@@ -11,7 +11,15 @@ export class EnseignentService {
   constructor(private http: HttpClient) {
   }
 
-  getEnseignents():Observable<any> {
-    return this.http.get(`${environment.apiUrl}/administration/enseignents`)
+  getEnseignents(search:string=""):Observable<any> {
+    return this.http.get(`${environment.apiUrl}/administration/enseignents?search=${search}`)
   }
+  
+  getEnseignentByDepartement(idDepartement: number): Observable<any> {
+    if(idDepartement)
+      return this.http.get(`${environment.apiUrl}/administration/enseignents?departement=${idDepartement}`)
+    else
+      return this.http.get(`${environment.apiUrl}/administration/enseignents`)
+  }
+
 }
