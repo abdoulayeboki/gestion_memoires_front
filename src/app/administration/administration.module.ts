@@ -6,6 +6,7 @@ import { AdministrationRoutingModule } from './administration-routing.module';
 import { DepartementComponent } from './components/departement/departement.component';
 import { FiliereComponent } from './components/filiere/filiere.component';
 import { SpecialiteComponent } from './components/specialite/specialite.component';
+import { EtudiantService } from './services/etudiant.service';
 
 
 @NgModule({
@@ -13,6 +14,9 @@ import { SpecialiteComponent } from './components/specialite/specialite.componen
   imports: [
     CommonModule,
     AdministrationRoutingModule,
+  ],
+  providers: [
+    EtudiantService
   ]
 })
 export class AdministrationModule { }

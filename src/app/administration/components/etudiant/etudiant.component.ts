@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EtudiantService } from 'src/app/services/etudiant.service';
-import { Etudiant } from '../../../modeles/etudiant';
 import { map } from 'rxjs/operators';
+import { EtudiantService } from '../../services/etudiant.service';
+import { Etudiant } from '../../modeles/etudiant';
 
 @Component({
   selector: 'app-etudiant',
