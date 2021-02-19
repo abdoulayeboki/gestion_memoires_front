@@ -31,7 +31,7 @@
                                 <option *ngFor="let departement of departements" value={{departement.id}}>{{departement.code}} </option>
                         </select>
                         </div>
-
+                        <div class="col-sm-3"></div>
                         <div class="col-sm-5">
                             <div class="input-group"><input placeholder="Search by code,nom" type="text" [formControl]="search" class="form-control form-control-sm"> <span class="input-group-append"> 
                                      <button type="button" (click)="getFilieres()" class="btn btn-sm btn-primary">Go!

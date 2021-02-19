@@ -34,7 +34,7 @@
                         <div class="col-sm-3 m-b-xs">
                             <select #p (change)="this.getEtudiantsByPromotion(p.value)" class="form-control-sm form-control input-s-sm inline">
                                 <option value=0>Afficher par  Promotion </option>
-                                <option *ngFor="let promotion of promotions" value={{promotion.id}}>{{promotion.code}} </option>
+                                <option  *ngFor="let promotion of promotions" value={{promotion.id}}>{{promotion.code}} </option>
                         </select>
                         </div>
                         <div class="col-sm-3 m-b-xs">

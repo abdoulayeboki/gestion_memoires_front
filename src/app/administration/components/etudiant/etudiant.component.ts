@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { map, mergeMap } from 'rxjs/operators';
 import { EtudiantService } from '../../services/etudiant.service';
 import { Etudiant } from '../../models/etudiant';
@@ -13,7 +13,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './etudiant.component.html',
   styleUrls: ['./etudiant.component.scss']
 })
-export class EtudiantComponent implements OnInit {
+export class EtudiantComponent implements OnInit, OnChanges {
   etudiants: any;
   codeClasse: string='';
   niveau: string = '';
@@ -32,6 +32,7 @@ export class EtudiantComponent implements OnInit {
     { code: "T2", nom: "These 2" },
     { code: "T3", nom: "These 3" },
   ]
+  valeur:string=""
   constructor(
     private etudiantService: EtudiantService,
     private classeService: ClasseService,
@@ -43,6 +44,10 @@ export class EtudiantComponent implements OnInit {
     this.getEtudiants()
     this.getClasses()
     this.getPromotions()
+  }
+  
+  ngOnChanges(): void {
+    console.log("sarr")
   }
   getEtudiants() {
     this.etudiantService.getEtudiants(this.search.value).subscribe(
