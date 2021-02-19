@@ -1,15 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Static Tables</h2>
+        <h2>Etudiants</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a href="index.html">Home</a>
             </li>
-            <li class="breadcrumb-item">
-                <a>Tables</a>
-            </li>
             <li class="breadcrumb-item active">
-                <strong>Static Tables</strong>
+                <strong>Etudiants</strong>
             </li>
         </ol>
     </div>
@@ -19,7 +16,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Custom responsive table </h5>
+                    <h5>Etudiants </h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -30,20 +27,20 @@
                     <div class="row">
                         <div class="col-sm-3 m-b-xs">
                             <select #n (change)="getEtudiantsByNiveau(n.value)" class="form-control-sm form-control input-s-sm inline">
-                            <option value="">Tous les niveaux </option>
+                            <option value="">Afficher par niveau </option>
                             <option *ngFor="let niveau of niveaux" value="{{niveau.code}}" >{{niveau.nom}} </option>
                         </select>
                         </div>
                         <div class="col-sm-3 m-b-xs">
                             <select #p (change)="this.getEtudiantsByPromotion(p.value)" class="form-control-sm form-control input-s-sm inline">
-                                <option value="">Toutes les Promotions </option>
-                                <option *ngFor="let promotion of promotions" value={{promotion.code}}>{{promotion.code}} </option>
+                                <option value=0>Afficher par  Promotion </option>
+                                <option *ngFor="let promotion of promotions" value={{promotion.id}}>{{promotion.code}} </option>
                         </select>
                         </div>
                         <div class="col-sm-3 m-b-xs">
                             <select #c (change)="this.getEtudiantsByClasse(c.value)" class="form-control-sm form-control input-s-sm inline">
-                                <option value="">Toutes les Classe </option>
-                                <option *ngFor="let classe of classes" value={{classe.code}}>{{classe.code}} </option>
+                                <option value=0>Afficher par  Classe </option>
+                                <option *ngFor="let classe of classes" value={{classe.id}}>{{classe.code}} </option>
                         </select>
                         </div>
                         <div class="col-sm-3">

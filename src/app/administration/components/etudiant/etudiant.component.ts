@@ -4,7 +4,6 @@ import { EtudiantService } from '../../services/etudiant.service';
 import { Etudiant } from '../../models/etudiant';
 import { Classe } from '../../models/classe';
 import { ClasseService } from '../../services/classe.service';
-import { forkJoin } from 'rxjs';
 import { PromotionService } from '../../services/promotion.service';
 import { Promotion } from '../../models/promotion';
 import { FormControl } from '@angular/forms';
@@ -22,6 +21,9 @@ export class EtudiantComponent implements OnInit {
   classes: Classe[] | any;
   promotions: Promotion[] | any;
   search = new FormControl('');
+  idPromotion: number = 0;
+  idClasse: number = 0;
+  idFiliere: number = 0;
   niveaux = [
     { code: "BTS", nom: "BTS" },
     { code: "L3", nom: "Licence 3" },
@@ -37,7 +39,8 @@ export class EtudiantComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getFilterEtudiant()
+    // this.getFilterEtudiant()
+    this.getEtudiants()
     this.getClasses()
     this.getPromotions()
   }
@@ -68,132 +71,24 @@ export class EtudiantComponent implements OnInit {
       (error) => console.log(error)
    )
   }
-  getEtudiantsByPromotion(codePromo: string) {
-    this.codePromotion = codePromo;
+  getEtudiantsByPromotion(idPromo: string) {
+    this.idPromotion = parseInt(idPromo);
     this.getFilterEtudiant()
   }
   getFilterEtudiant() {
-    if (this.codeClasse !== '' && this.niveau !=='' && this.codePromotion !=='') {
-      this.etudiantService.getEtudiants().pipe(
-        map(
-          (etudiant: Etudiant[]) => etudiant.filter(
-            (etudiant: Etudiant) => 
-                etudiant.classe.code === this.codeClasse &&
-              etudiant.classe.specialite.niveau === this.niveau &&
-              etudiant.promotion.code === this.codePromotion
-          )
-        )
-      ).subscribe(
-        (data) => {
-          this.etudiants = data
-          console.log(data)
-        },
-        (error) => console.log(error)
-      )
-    }else if (this.codeClasse !== '' && this.codePromotion !='') {
-      this.etudiantService.getEtudiants().pipe(
-        map(
-          (etudiant: Etudiant[]) => etudiant.filter(
-            (etudiant: Etudiant) => 
-                etudiant.classe.code === this.codeClasse && etudiant.promotion.code === this.codePromotion
-          )
-        )
-      ).subscribe(
-        (data) => {
-          this.etudiants = data
-          console.log(data)
-        },
-        (error) => console.log(error)
-      ) 
-    }else if (this.niveau !== '' && this.codePromotion !='') {
-      this.etudiantService.getEtudiants().pipe(
-        map(
-          (etudiant: Etudiant[]) => etudiant.filter(
-            (etudiant: Etudiant) => 
-            etudiant.classe.specialite.niveau === this.niveau && etudiant.promotion.code === this.codePromotion
-          )
-        )
-      ).subscribe(
-        (data) => {
-          this.etudiants = data
-          console.log(data)
-        },
-        (error) => console.log(error)
-      ) 
-    }else if (this.niveau !== '') {
-      this.etudiantService.getEtudiants().pipe(
-        map(
-          (etudiant: Etudiant[]) => etudiant.filter(
-            (etudiant: Etudiant) => 
-            etudiant.classe.specialite.niveau === this.niveau 
-          )
-        )
-      ).subscribe(
-        (data) => {
-          this.etudiants = data
-          console.log(data)
-        },
-        (error) => console.log(error)
-      ) 
-    }else if (this.codeClasse !== '') {
-      this.etudiantService.getEtudiants().pipe(
-        map(
-          (etudiant: Etudiant[]) => etudiant.filter(
-            (etudiant: Etudiant) => 
-            etudiant.classe.code === this.codeClasse 
-          )
-        )
-      ).subscribe(
-        (data) => {
-          this.etudiants = data
-          console.log(data)
-        },
-        (error) => console.log(error)
-      ) 
-    }else if (this.codePromotion !== '') {
-      this.etudiantService.getEtudiants().pipe(
-        map(
-          (etudiant: Etudiant[]) => etudiant.filter(
-            (etudiant: Etudiant) => 
-            etudiant.promotion.code === this.codePromotion
-          )
-        )
-      ).subscribe(
-        (data) => {
-          this.etudiants = data
-          console.log(data)
-        },
-        (error) => console.log(error)
-      ) 
-    }
-    else {
-      this.getEtudiants()
-    }
-    
+    this.etudiantService.getEtudiantByFilter(this.idPromotion, this.idClasse, this.niveau).subscribe(
+      (data) => {
+        this.etudiants = data
+      }
+    )
   }
-  getEtudiantsByClasse(codeClasse: string) {
-    this.codeClasse = codeClasse;
+  getEtudiantsByClasse(idClasse: string) {
+    this.idClasse = parseInt(idClasse);
     this.getFilterEtudiant()
   }
   getEtudiantsByNiveau(niveau: string) {
     this.niveau = niveau
     this.getFilterEtudiant()
-  }
-  
-  getEtudiantsByFiliere(idFiliere: number) {
-    this.etudiantService.getEtudiants().pipe(
-      map(
-        (etudiant: Etudiant[]) => etudiant.filter(
-          (etudiant: Etudiant) => etudiant.classe.specialite.filiere.id == idFiliere
-        )
-      )
-    ).subscribe(
-      (data) => {
-        this.etudiants =data
-        console.log(data)
-      },
-      (error) => console.log(error)
-   )
   }
   
 }
