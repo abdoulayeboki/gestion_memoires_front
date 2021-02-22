@@ -4,5 +4,5 @@ export interface Classe {
   code: string;
   nom: string;
   specialite: Specialite;
-  
+  anneeScolaire: string;
 }

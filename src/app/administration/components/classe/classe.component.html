@@ -39,27 +39,36 @@
 
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Specialite</th>
-                                    <th>Filiere</th>
-                                    <th>Annee Scolaire</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let classe of classes">
-                                    <td>{{classe.code}} </td>
-                                    <td><a [routerLink]="['/specialites']">{{classe.specialite.nom}} </a></td>
-                                    <td><a [routerLink]="['/filieres']">{{classe.specialite.filiere.nom}} </a></td>
-                                    <td>{{classe.anneeScolaire}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+                    <ng-container *ngIf="(classes | async) as result" [ngSwitch]="result.dataState">
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                            Loading .....
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                            <div class="alert alert-danger"> {{result.errorMessage}} </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Specialite</th>
+                                            <th>Filiere</th>
+                                            <th>Annee Scolaire</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let classe of result.data">
+                                            <td>{{classe.code}} </td>
+                                            <td><a [routerLink]="['/specialites']">{{classe.specialite.nom}} </a></td>
+                                            <td><a [routerLink]="['/filieres']">{{classe.specialite.filiere.nom}} </a></td>
+                                            <td>{{classe.anneeScolaire}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-container>
+                    </ng-container>
                 </div>
             </div>
         </div>

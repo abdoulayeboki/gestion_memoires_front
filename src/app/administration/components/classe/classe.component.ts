@@ -3,6 +3,10 @@ import { ClasseService } from '../../services/classe.service';
 import { FormControl } from '@angular/forms';
 import { Filiere } from '../../models/filiere';
 import { FiliereService } from '../../services/filiere.service';
+import { DataStateEnum, AppDataState } from '../../../core/models/app-data-state';
+import { Observable, of } from 'rxjs';
+import { Classe } from '../../models/classe';
+import { catchError, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-classe',
@@ -11,14 +15,14 @@ import { FiliereService } from '../../services/filiere.service';
 })
 export class ClasseComponent implements OnInit {
 
-  classes: any
+  classes: Observable<AppDataState<Classe[]>> | undefined
   search = new FormControl('')
   filieres : any
   constructor(
     private classeService: ClasseService,
     private filiereService: FiliereService
   ) { }
-
+  readonly DataStateEnum= DataStateEnum
   ngOnInit(): void {
     this.getClasses()
     this.getFilieres()
@@ -34,22 +38,22 @@ export class ClasseComponent implements OnInit {
   }
   getClasseByFiliere(idFiliere: string) {
     let id = parseInt(idFiliere)
-    this.classeService.getClasseByFiliere(id).subscribe(
-      (data) => {
-        console.log(data)
-        this.classes =data
-      },
-      (error) => console.log(error)
-   )
+    this.classes = this.classeService.getClasseByFiliere(id).pipe(
+      map(data => {
+           return ({dataState : DataStateEnum.LOADED, data: data})
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError (error =>of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
+    )
   }
   getClasses() {
-    this.classeService.getClasses(this.search.value).subscribe(
-      (data) => {
-        console.log(data)
-        this.classes =data
-      },
-      (error) => console.log(error)
-   )
+    this.classes = this.classeService.getClasses(this.search.value).pipe(
+      map(data => {
+           return ({dataState : DataStateEnum.LOADED, data: data})
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError (error =>of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
+    )
   }
 
 }

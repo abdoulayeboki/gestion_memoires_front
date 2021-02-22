@@ -39,24 +39,35 @@
 
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Nom de la specialite </th>
-                                    <th>Filiere </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let specialite of specialites">
-                                    <td>{{specialite.code}} </td>
-                                    <td>{{specialite.nom}}</td>
-                                    <td><a [routerLink]="['/filieres']"> {{specialite.filiere.nom}} </a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <ng-container *ngIf="(specialites | async) as result" [ngSwitch]="result.dataState">
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                            Loading .....
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                            <div class="alert alert-danger"> {{result.errorMessage}} </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Nom de la specialite </th>
+                                            <th>Filiere </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let specialite of result.data">
+                                            <td>{{specialite.code}} </td>
+                                            <td>{{specialite.nom}}</td>
+                                            <td><a [routerLink]="['/filieres']"> {{specialite.filiere.nom}} </a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+
 
                 </div>
             </div>

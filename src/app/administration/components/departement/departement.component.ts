@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartementService } from '../../services/departement.service';
 import { FormControl } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { Departement } from '../../models/departement';
+import { DataStateEnum } from 'src/app/core/models/app-data-state';
+import { catchError, map, startWith } from 'rxjs/operators';
+import { AppDataState } from '../../../core/models/app-data-state';
 
 @Component({
   selector: 'app-departement',
@@ -8,21 +13,25 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./departement.component.scss']
 })
 export class DepartementComponent implements OnInit {
-  departements: any
+  departements: Observable<AppDataState<Departement[]>>| null | undefined
   search = new FormControl('');
+  readonly DataStateEnum = DataStateEnum;
   constructor(private departementService: DepartementService) { }
 
   ngOnInit(): void {
     this.getDepartements()
   }
+
   getDepartements() {
-    this.departementService.getDepartements(this.search.value).subscribe(
-      (data) => {
-        console.log(data)
-        this.departements =data
-      },
-      (error) => console.log(error)
-   )
+    this.departements = this.departementService.getDepartements().
+      pipe(
+        map(data => {
+          return ({ dataState: DataStateEnum.LOADED, data: data })
+        }),
+        startWith({dataState: DataStateEnum.LOADING}),
+        catchError( (error) =>of( {dataState: DataStateEnum.ERROR, errorMessage:error.message}))
+    ) 
+    ; 
   }
 
 }

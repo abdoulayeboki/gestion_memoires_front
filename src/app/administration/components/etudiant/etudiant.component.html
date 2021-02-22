@@ -51,36 +51,47 @@
 
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>INE</th>
-                                    <th>Prenom </th>
-                                    <th>Nom </th>
-                                    <th>Telephon</th>
-                                    <th>Email</th>
-                                    <th>Promotion</th>
-                                    <th>Code Classe</th>
-                                    <th>Specialite</th>
-                                    <th>Niveau</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let etudiant of etudiants">
-                                    <td>{{etudiant.ine}} </td>
-                                    <td>{{etudiant.prenom}}</td>
-                                    <td>{{etudiant.nom}}</td>
-                                    <td>{{etudiant.telephon}}</td>
-                                    <td>{{etudiant.email}}</td>
-                                    <td>{{etudiant.promotion.code}}</td>
-                                    <td>{{etudiant.classe.code}}</td>
-                                    <td><a [routerLink]="['/specialites']">{{etudiant.classe.specialite.nom}}</a></td>
-                                    <td>{{etudiant.classe.specialite.niveau}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <ng-container *ngIf="(etudiants | async) as result" [ngSwitch]="result.dataState">
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                            Loading .....
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                            <div class="alert alert-danger"> {{result.errorMessage}} </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>INE</th>
+                                            <th>Prenom </th>
+                                            <th>Nom </th>
+                                            <th>Telephon</th>
+                                            <th>Email</th>
+                                            <th>Promotion</th>
+                                            <th>Code Classe</th>
+                                            <th>Specialite</th>
+                                            <th>Niveau</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let etudiant of result.data">
+                                            <td>{{etudiant.ine}} </td>
+                                            <td>{{etudiant.prenom}}</td>
+                                            <td>{{etudiant.nom}}</td>
+                                            <td>{{etudiant.telephon}}</td>
+                                            <td>{{etudiant.email}}</td>
+                                            <td>{{etudiant.promotion.code}}</td>
+                                            <td>{{etudiant.classe.code}}</td>
+                                            <td><a [routerLink]="['/specialites']">{{etudiant.classe.specialite.nom}}</a></td>
+                                            <td>{{etudiant.classe.specialite.niveau}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+
 
                 </div>
             </div>

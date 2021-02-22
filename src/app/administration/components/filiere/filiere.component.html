@@ -39,24 +39,35 @@
 
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Nom de la filiere </th>
-                                    <th>Departement </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let filiere of filieres">
-                                    <td>{{filiere.code}} </td>
-                                    <td>{{filiere.nom}}</td>
-                                    <td><a [routerLink]="['/departements']"> {{filiere.departement.nom}}</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <ng-container *ngIf="(filieres | async) as result" [ngSwitch]="result.dataState">
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                            Loading .....
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                            <div class="alert alert-danger"> {{result.errorMessage}} </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Nom de la filiere </th>
+                                            <th>Departement </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let filiere of result.data">
+                                            <td>{{filiere.code}} </td>
+                                            <td>{{filiere.nom}}</td>
+                                            <td><a [routerLink]="['/departements']"> {{filiere.departement.nom}}</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+
 
                 </div>
             </div>

@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { SpecialiteService } from '../../services/specialite.service';
 import { FormControl } from '@angular/forms';
 import { FiliereService } from '../../services/filiere.service';
+import { DataStateEnum } from 'src/app/core/models/app-data-state';
+import { Observable, of } from 'rxjs';
+import { AppDataState } from '../../../core/models/app-data-state';
+import { Specialite } from '../../models/specialite';
+import { catchError, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-specialite',
@@ -10,8 +15,9 @@ import { FiliereService } from '../../services/filiere.service';
 })
 export class SpecialiteComponent implements OnInit {
 
-  specialites: any
+  specialites: Observable<AppDataState<Specialite[]>> | undefined
   filieres: any
+  readonly DataStateEnum=DataStateEnum
   search= new FormControl('')
   constructor(
     private specialiteService: SpecialiteService,
@@ -23,13 +29,13 @@ export class SpecialiteComponent implements OnInit {
     this.getFilieres()
   }
   getSpecialites() {
-    this.specialiteService.getSpecialites(this.search.value).subscribe(
-      (data) => {
-        console.log(data)
-        this.specialites =data
-      },
-      (error) => console.log(error)
-   )
+    this.specialites = this.specialiteService.getSpecialites(this.search.value).pipe(
+      map(data => {
+           return ({dataState : DataStateEnum.LOADED, data: data})
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError(error =>of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
+    )
   }
   getFilieres() {
     this.filiereService.getFilieres(this.search.value).subscribe(
@@ -38,16 +44,16 @@ export class SpecialiteComponent implements OnInit {
         this.filieres =data
       },
       (error) => console.log(error)
-   )
+    )
   }
   getSpecialiteByFiliere(idFiliere: string) {
     let id = parseInt(idFiliere)
-    this.specialiteService.getSpecialiteByFiliere(id).subscribe(
-      (data) => {
-        console.log(data)
-        this.specialites =data
-      },
-      (error) => console.log(error)
-   )
+    this.specialites = this.specialiteService.getSpecialiteByFiliere(id).pipe(
+      map(data => {
+           return ({dataState : DataStateEnum.LOADED, data: data})
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError(error =>of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
+    )
   }
 }

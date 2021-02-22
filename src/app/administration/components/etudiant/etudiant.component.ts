@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, startWith } from 'rxjs/operators';
 import { EtudiantService } from '../../services/etudiant.service';
 import { Etudiant } from '../../models/etudiant';
 import { Classe } from '../../models/classe';
@@ -7,6 +7,9 @@ import { ClasseService } from '../../services/classe.service';
 import { PromotionService } from '../../services/promotion.service';
 import { Promotion } from '../../models/promotion';
 import { FormControl } from '@angular/forms';
+import { DataStateEnum } from 'src/app/core/models/app-data-state';
+import { AppDataState } from '../../../core/models/app-data-state';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-etudiant',
@@ -14,7 +17,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./etudiant.component.scss']
 })
 export class EtudiantComponent implements OnInit, OnChanges {
-  etudiants: any;
+  etudiants: Observable<AppDataState<Etudiant[]>> | undefined;
   codeClasse: string='';
   niveau: string = '';
   codePromotion: string=""
@@ -24,6 +27,7 @@ export class EtudiantComponent implements OnInit, OnChanges {
   idPromotion: number = 0;
   idClasse: number = 0;
   idFiliere: number = 0;
+  readonly DataStateEnum= DataStateEnum
   niveaux = [
     { code: "BTS", nom: "BTS" },
     { code: "L3", nom: "Licence 3" },
@@ -50,13 +54,13 @@ export class EtudiantComponent implements OnInit, OnChanges {
     console.log("sarr")
   }
   getEtudiants() {
-    this.etudiantService.getEtudiants(this.search.value).subscribe(
-      (data) => {
-        console.log(data)
-        this.etudiants =data
-      },
-      (error) => console.log(error)
-   )
+    this.etudiants = this.etudiantService.getEtudiants(this.search.value).pipe(
+      map(data => {
+        return ({ dataState: DataStateEnum.LOADED, data: data })
+      }),
+      startWith({dataState: DataStateEnum.LOADING}),
+      catchError( (error) =>of( {dataState: DataStateEnum.ERROR, errorMessage:error.message}))
+    ) 
   }
   getPromotions() {
     this.promotionService.getPromotions().subscribe(
@@ -81,11 +85,13 @@ export class EtudiantComponent implements OnInit, OnChanges {
     this.getFilterEtudiant()
   }
   getFilterEtudiant() {
-    this.etudiantService.getEtudiantByFilter(this.idPromotion, this.idClasse, this.niveau).subscribe(
-      (data) => {
-        this.etudiants = data
-      }
-    )
+    this.etudiants = this.etudiantService.getEtudiantByFilter(this.idPromotion, this.idClasse, this.niveau).pipe(
+      map(data => {
+        return ({ dataState: DataStateEnum.LOADED, data: data })
+      }),
+      startWith({dataState: DataStateEnum.LOADING}),
+      catchError( (error) =>of( {dataState: DataStateEnum.ERROR, errorMessage:error.message}))
+    ) 
   }
   getEtudiantsByClasse(idClasse: string) {
     this.idClasse = parseInt(idClasse);
