@@ -135,6 +135,7 @@
 )[0m
 [0m2021.02.22 09:03:54 INFO  logging to file C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\.metals\metals.log[0m
 <<<<<<< HEAD
+<<<<<<< HEAD
 [0m2021.02.23 09:59:41 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\null\scalameta\metals\cache\lsp.trace.json[0m
 [0m2021.02.23 09:59:47 INFO  Starting Metals server with configuration: MetalsServerConfig(
   glob-syntax=GlobSyntaxConfig(vscode),
@@ -169,5 +170,7 @@
   bloop-port=default
 )[0m
 [0m2021.02.23 15:04:30 INFO  logging to file C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\.metals\metals.log[0m
+=======
+>>>>>>> parent of 1be080c (module administration gestion des erreur)
 =======
 >>>>>>> parent of 1be080c (module administration gestion des erreur)
