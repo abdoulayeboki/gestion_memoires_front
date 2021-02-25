@@ -45,6 +45,8 @@ testem.log
 .DS_Store
 Thumbs.db
 .metals/metals.lock.db
+.metals/metals.log
+.metals/metals.h2.db
 .metals/
 .metals/
 metals/*
