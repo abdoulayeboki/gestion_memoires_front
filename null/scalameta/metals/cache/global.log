@@ -180,3 +180,54 @@
 >>>>>>> parent of 1be080c (module administration gestion des erreur)
 =======
 >>>>>>> parent of 1be080c (module administration gestion des erreur)
+[0m2021.03.25 17:35:12 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\null\scalameta\metals\cache\lsp.trace.json[0m
+[0m2021.03.25 17:35:13 INFO  Starting Metals server with configuration: MetalsServerConfig(
+  glob-syntax=GlobSyntaxConfig(vscode),
+  status-bar=StatusBarConfig(off),
+  open-files-on-rename=false,
+  rename-file-threshold=300,
+  slow-task=SlowTaskConfig(off),
+  execute-client-command=ExecuteClientCommandConfig(off),
+  compilers=PresentationCompilerConfigImpl(false,Some(editor.action.triggerParameterHints),Some(editor.action.triggerSuggest),Map(scala/collection/mutable/ -> mutable., java/util/ -> ju.),Unicode,true,true,true,true,true,true,true,scala.meta.internal.pc.PresentationCompilerConfigImpl$$$Lambda$71/0x00000001001f1c40@6531a794,20,SECONDS),
+  http=false,
+  input-box=false,
+  ask-to-reconnect=false,
+  icons=vscode,
+  statistics=StatisticsConfig(default),
+  bloop-port=default
+)[0m
+[0m2021.03.25 17:35:14 INFO  logging to file C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\.metals\metals.log[0m
+[0m2021.03.25 18:10:41 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\null\scalameta\metals\cache\lsp.trace.json[0m
+[0m2021.03.25 18:10:44 INFO  Starting Metals server with configuration: MetalsServerConfig(
+  glob-syntax=GlobSyntaxConfig(vscode),
+  status-bar=StatusBarConfig(off),
+  open-files-on-rename=false,
+  rename-file-threshold=300,
+  slow-task=SlowTaskConfig(off),
+  execute-client-command=ExecuteClientCommandConfig(off),
+  compilers=PresentationCompilerConfigImpl(false,Some(editor.action.triggerParameterHints),Some(editor.action.triggerSuggest),Map(scala/collection/mutable/ -> mutable., java/util/ -> ju.),Unicode,true,true,true,true,true,true,true,scala.meta.internal.pc.PresentationCompilerConfigImpl$$$Lambda$71/0x00000001001f1c40@6531a794,20,SECONDS),
+  http=false,
+  input-box=false,
+  ask-to-reconnect=false,
+  icons=vscode,
+  statistics=StatisticsConfig(default),
+  bloop-port=default
+)[0m
+[0m2021.03.25 18:10:45 INFO  logging to file C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\.metals\metals.log[0m
+[0m2021.03.25 22:22:42 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at c:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\null\scalameta\metals\cache\lsp.trace.json[0m
+[0m2021.03.25 22:22:44 INFO  Starting Metals server with configuration: MetalsServerConfig(
+  glob-syntax=GlobSyntaxConfig(vscode),
+  status-bar=StatusBarConfig(off),
+  open-files-on-rename=false,
+  rename-file-threshold=300,
+  slow-task=SlowTaskConfig(off),
+  execute-client-command=ExecuteClientCommandConfig(off),
+  compilers=PresentationCompilerConfigImpl(false,Some(editor.action.triggerParameterHints),Some(editor.action.triggerSuggest),Map(scala/collection/mutable/ -> mutable., java/util/ -> ju.),Unicode,true,true,true,true,true,true,true,scala.meta.internal.pc.PresentationCompilerConfigImpl$$$Lambda$71/0x00000001001f1c40@6531a794,20,SECONDS),
+  http=false,
+  input-box=false,
+  ask-to-reconnect=false,
+  icons=vscode,
+  statistics=StatisticsConfig(default),
+  bloop-port=default
+)[0m
+[0m2021.03.25 22:22:45 INFO  logging to file C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front\.metals\metals.log[0m

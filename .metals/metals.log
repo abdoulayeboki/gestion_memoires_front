@@ -39,3 +39,13 @@ INFO: Unsupported notification method: $/setTraceNotification
 [0m2021.02.25 13:08:04 INFO  time: initialize in 4.97s[0m
 [0m2021.02.25 13:08:10 WARN  Build server is not auto-connectable.[0m
 [0m2021.02.25 13:08:10 WARN  no build tool detected in workspace 'C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.02.26 08:59:08 INFO  shutting down Metals[0m
+[0m2021.03.25 17:35:14 INFO  Started: Metals version 0.10.0 in workspace 'C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front' for client vscode 1.53.0.[0m
+[0m2021.03.25 17:35:19 INFO  time: initialize in 5.44s[0m
+[0m2021.03.25 17:35:23 WARN  Build server is not auto-connectable.[0m
+[0m2021.03.25 17:35:23 WARN  no build tool detected in workspace 'C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.03.25 18:03:11 INFO  shutting down Metals[0m
+[0m2021.03.25 18:10:45 INFO  Started: Metals version 0.10.0 in workspace 'C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front' for client vscode 1.53.0.[0m
+[0m2021.03.25 18:10:58 INFO  time: initialize in 12s[0m
+[0m2021.03.25 18:11:03 WARN  Build server is not auto-connectable.[0m
+[0m2021.03.25 18:11:03 WARN  no build tool detected in workspace 'C:\Users\Abdoulaye SARR\Documents\angular_tp\gestion-memoires-front'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m

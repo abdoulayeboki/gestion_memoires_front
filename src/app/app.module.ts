@@ -8,6 +8,7 @@ import { SidebarComponent } from './core/layout/sidebar/sidebar.component';
 import { AdministrationModule } from './administration/administration.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DefaultComponent } from './core/default/default.component';
+import { ModuleSujetModule } from './module-sujet/module-sujet.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { DefaultComponent } from './core/default/default.component';
     BrowserModule,
     AppRoutingModule,
     AdministrationModule,
+    ModuleSujetModule,
     HttpClientModule,
   ],
   providers: [],
