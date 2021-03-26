@@ -15,4 +15,9 @@ export class SujetService {
   getSujets(etatSujet: string=""): Observable<Sujet[]> {
     return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?etatSujet=${etatSujet}`)
   }
+
+  postSujets(sujet: Sujet): Observable<Sujet> {
+    sujet.owner=1
+    return this.http.post<Sujet>(`${environment.apiUrl}/sujets`,sujet)
+  }
 }

@@ -9,6 +9,7 @@ import { AdministrationModule } from './administration/administration.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DefaultComponent } from './core/default/default.component';
 import { ModuleSujetModule } from './module-sujet/module-sujet.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,6 +25,8 @@ import { ModuleSujetModule } from './module-sujet/module-sujet.module';
     AdministrationModule,
     ModuleSujetModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

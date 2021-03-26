@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { TypeEvenementSujet, EvenementSujet } from '../../../../core/models/app-data-state';
-import { SujetObservableService } from '../../../services/sujet-observable.service';
+import { TypeEvenementSujet, EvenementSujet } from '../../../../../core/models/app-data-state';
+import { SujetObservableService } from '../../../../services/sujet-observable.service';
 
 @Component({
   selector: 'app-sujet-navbar',
