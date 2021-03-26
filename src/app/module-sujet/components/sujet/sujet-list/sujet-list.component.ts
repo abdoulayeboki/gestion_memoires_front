@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { SujetService } from '../services/sujet.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { AppDataState, DataStateEnum, EvenementSujet, TypeEvenementSujet } from '../../core/models/app-data-state';
-import { Sujet } from '../models/sujet';
-import { map, startWith, catchError } from 'rxjs/operators';
-import { SujetObservableService } from '../services/sujet-observable.service';
+import { AppDataState, DataStateEnum, TypeEvenementSujet, EvenementSujet } from '../../../../core/models/app-data-state';
+import { Sujet } from '../../../models/sujet';
+import { catchError, startWith, map } from 'rxjs/operators';
+import { SujetObservableService } from '../../../services/sujet-observable.service';
+import { SujetService } from '../../../services/sujet.service';
 
 @Component({
-  selector: 'app-sujet',
-  templateUrl: './sujet.component.html',
-  styleUrls: ['./sujet.component.scss']
+  selector: 'app-sujet-list',
+  templateUrl: './sujet-list.component.html',
+  styleUrls: ['./sujet-list.component.scss']
 })
-export class SujetComponent implements OnInit {
+export class SujetListComponent implements OnInit {
   sujets$: Observable<AppDataState<Sujet[]>> | undefined
   readonly DataStateEnum = DataStateEnum; 
   constructor(
