@@ -9,6 +9,7 @@ import { SujetService } from '../../../services/sujet.service';
 })
 export class SujetAddComponent implements OnInit {
   sujetFormGroup?: FormGroup;
+  submitted:boolean=false;
   constructor(
     private fb: FormBuilder,
     private sujetService: SujetService,
@@ -21,11 +22,13 @@ export class SujetAddComponent implements OnInit {
     })
   }
   onSubmit() {
+    this.submitted = true;
     if (this.sujetFormGroup?.invalid) return;
     console.log(this.sujetFormGroup?.value)
     this.sujetService.postSujets(this.sujetFormGroup?.value)
       .subscribe(data=>{
         alert("Success Saving product");
       });
-   }
+  }
+  // get f() { return this.sujetFormGroup?.controls; }
 }

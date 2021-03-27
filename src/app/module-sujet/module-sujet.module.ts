@@ -8,10 +8,11 @@ import { SujetListComponent } from './components/sujet/sujet-list/sujet-list.com
 import { SujetService } from './services/sujet.service';
 import { SujetAddComponent } from './components/sujet/sujet-add/sujet-add.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SujetEditComponent } from './components/sujet/sujet-edit/sujet-edit.component';
 
 
 @NgModule({
-  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent],
+  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent, SujetEditComponent],
   imports: [
     CommonModule,
     ModuleSujetRoutingModule,
