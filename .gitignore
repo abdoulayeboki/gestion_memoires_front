@@ -48,3 +48,7 @@ Thumbs.db
 .metals/*
 
 null/scalameta/metals/cache/global.log
+
+*/metals/*
+
+null/*
