@@ -40,11 +40,12 @@
                                             <td>{{sujet.description}} </td>
                                             <td>{{sujet.createdDate}}</td>
                                             <td>{{sujet.etatSujet}}</td>
-                                            <td><button routerLink="sujet_edit" class="btn btn-outline-success"><a><span class="fa fa-pencil"></span></a></button> </td>
+                                            <td><button [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a><span class="fa fa-pencil"></span></a></button> </td>
                                             <td><button class="btn btn-outline-success"><a>View</a></button>
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <!-- [routerLink]="['sujet_edit', sujet.id]  (click)="onUpdateSujet(sujet.id)" -->
                                 </table>
                             </div>
                         </ng-container>

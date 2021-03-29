@@ -14,29 +14,29 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar navbar-nav">
         <li>
-            <button routerLink="sujets_list" routerLinkActive="router-link-active" (click)="onGetAll()" class="btn btn-sm btn-outline-info ml-2">All</button>
+            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-sm btn-outline-info ml-2">All</button>
         </li>
         <li>
-            <button routerLink="sujets_list" (click)="onGetSujetPropose()" class="btn btn-sm btn-outline-info ml-2">Proposés</button>
+            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetPropose()" class="btn btn-sm btn-outline-info ml-2">Proposés</button>
         </li>
         <li>
-            <button routerLink="sujets_list" (click)="onGetSujetAccorde()" class="btn btn-sm btn-outline-info ml-2">Accordés</button>
+            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetAccorde()" class="btn btn-sm btn-outline-info ml-2">Accordés</button>
         </li>
         <li>
-            <button routerLink="sujets_list" (click)="onGetSujetValide()" class="btn btn-sm btn-outline-info ml-2">Valides</button>
+            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetValide()" class="btn btn-sm btn-outline-info ml-2">Valides</button>
         </li>
         <li>
-            <button routerLink="sujets_list" (click)="onGetSujetTermine()" class="btn btn-sm btn-outline-info ml-2">Terminé</button>
+            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetTermine()" class="btn btn-sm btn-outline-info ml-2">Terminé</button>
         </li>
         <li>
-            <button routerLink="sujets_list" (click)="onGetSujetSoutenu()" class="btn btn-sm btn-outline-info ml-2">Soutenus</button>
+            <button routerLink="sujets_list" routerLinkActive="activebutton" routerLinkActive="activebutton" (click)="onGetSujetSoutenu()" class="btn btn-sm btn-outline-info ml-2">Soutenus</button>
         </li>
         <li>
-            <button routerLink="sujets_list" (click)="onGetSujetDepose()" class="btn btn-sm btn-outline-info ml-2">Deposés</button>
+            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetDepose()" class="btn btn-sm btn-outline-info ml-2">Deposés</button>
         </li>
 
         <li>
-            <button routerLink="sujet_add" (click)="onGetAll()" class="btn btn-sm btn-outline-info ml-2">Nouveau</button>
+            <button routerLink="sujet_add" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-sm btn-outline-info ml-2">Nouveau</button>
         </li>
     </ul>
     <ul class="navbar navbar-nav ml-auto">

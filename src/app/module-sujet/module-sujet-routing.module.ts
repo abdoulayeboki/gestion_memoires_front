@@ -9,9 +9,9 @@ const routes: Routes = [
   {
     path: "sujets", component: SujetComponent,
     children: [
-      { path: "sujets_list", component: SujetListComponent },
+      { path: "sujets_list", component: SujetListComponent, },
       { path: "sujet_add", component: SujetAddComponent, },
-      { path: "sujet_edit", component: SujetEditComponent, },
+      { path: "sujet_edit/:id", component: SujetEditComponent, },
       {path: "", component: SujetListComponent,}
     ]
   }

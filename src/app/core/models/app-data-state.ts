@@ -16,7 +16,8 @@ export enum TypeEvenementSujet {
   TERMINE = "Sujet termine",
   SOUTENU = "Sjet soutenu",
   DEPOSE = "sujet depose",
-  ALL="tous les sujet"
+  ALL = "tous les sujet",
+  UPDATESUJET = "mettre à jour un sujet"
 }
 
 export interface EvenementSujet{

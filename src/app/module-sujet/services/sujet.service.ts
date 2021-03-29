@@ -22,4 +22,7 @@ export class SujetService {
     sujet.owner=1
     return this.http.post<Sujet>(`${environment.apiUrl}/sujets`,sujet)
   }
+  updateSujet(sujet: Sujet): Observable<Sujet> {
+    return this.http.put<Sujet>(`${environment.apiUrl}/sujets/${sujet.id}`,sujet)
+  }
 }
