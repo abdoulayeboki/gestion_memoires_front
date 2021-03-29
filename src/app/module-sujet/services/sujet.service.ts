@@ -25,4 +25,8 @@ export class SujetService {
   updateSujet(sujet: Sujet): Observable<Sujet> {
     return this.http.put<Sujet>(`${environment.apiUrl}/sujets/${sujet.id}`,sujet)
   }
+
+  deleteSujet(sujet?: Sujet): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/sujets/${sujet?.id}`)
+  }
 }

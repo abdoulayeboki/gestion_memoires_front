@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SujetService } from '../../../services/sujet.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sujet-add',
@@ -13,6 +14,7 @@ export class SujetAddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private sujetService: SujetService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -27,8 +29,12 @@ export class SujetAddComponent implements OnInit {
     console.log(this.sujetFormGroup?.value)
     this.sujetService.postSujets(this.sujetFormGroup?.value)
       .subscribe(data=>{
-        alert("Success Saving product");
+        alert("Success: sujet enregistre");
+        this.router.navigate(['sujets'])
       });
+  }
+  onCancel() {
+    this.router.navigate(['sujets'])
   }
   // get f() { return this.sujetFormGroup?.controls; }
 }

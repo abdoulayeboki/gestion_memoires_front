@@ -47,5 +47,8 @@ export class SujetEditComponent implements OnInit, OnDestroy {
         }
       );
   }
+  onCancel() {
+    this.router.navigate(['sujets'])
+  }
 
 }

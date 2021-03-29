@@ -4,6 +4,7 @@ import { SujetComponent } from './components/sujet/sujet.component';
 import { SujetListComponent } from './components/sujet/sujet-list/sujet-list.component';
 import { SujetAddComponent } from './components/sujet/sujet-add/sujet-add.component';
 import { SujetEditComponent } from './components/sujet/sujet-edit/sujet-edit.component';
+import { SujetViewComponent } from './components/sujet/sujet-view/sujet-view.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       { path: "sujets_list", component: SujetListComponent, },
       { path: "sujet_add", component: SujetAddComponent, },
       { path: "sujet_edit/:id", component: SujetEditComponent, },
+      { path: "sujet_view/:id", component: SujetViewComponent, },
       {path: "", component: SujetListComponent,}
     ]
   }

@@ -1,0 +1,17 @@
+<div *ngIf="sujet" class="col-lg-12">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5> Titre: {{sujet.titre}} </h5>
+            <div class="ibox-tools">
+                <button (click)="onCancel()" class="btn-outline-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
+                <button (click)="deleteSujet()" class="btn btn-outline-danger fa fa-trash"> </button>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="scroll_content">
+                <h2>Description</h2>
+                <p>{{sujet.description}} </p>
+            </div>
+        </div>
+    </div>
+</div>
