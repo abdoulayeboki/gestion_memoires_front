@@ -10,9 +10,11 @@ import { User } from '../../core/models/user';
   providedIn: 'root'
 })
 export class SujetService {
-  currentUser : User ;
+  currentUser: User;
+  user?: User;
   constructor(private http: HttpClient, private authService: AuthServiceService) {
-     this.currentUser = authService.currentUser;
+    this.currentUser = authService.currentUser;
+     this.authService.userObservable.subscribe(user =>this.user=user)
   }
 
   getSujets(etatSujet: string=""): Observable<Sujet[]> {
@@ -22,7 +24,9 @@ export class SujetService {
     return this.http.get<Sujet>(`${environment.apiUrl}/sujets/${id}`)
   }
   postSujets(sujet: Sujet): Observable<Sujet> {
-    sujet.owner =this.currentUser.user_id
+    sujet.owner = this.currentUser.user_id
+    // sujet.owner = this.user?.user_id
+    console.log(sujet.owner)
     return this.http.post<Sujet>(`${environment.apiUrl}/sujets`,sujet)
   }
   updateSujet(sujet: Sujet): Observable<Sujet> {

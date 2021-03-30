@@ -6,14 +6,15 @@ import { DepartementComponent } from './components/departement/departement.compo
 import { FiliereComponent } from './components/filiere/filiere.component';
 import { SpecialiteComponent } from './components/specialite/specialite.component';
 import { ClasseComponent } from './components/classe/classe.component';
+import { AuthGuardService } from '../core/services/auth-guard.service';
 
 const routes: Routes = [
-  { path: "etudiants", component: EtudiantComponent },
-  { path: "enseignents", component: EnseignentComponent },
-  { path: "departements", component: DepartementComponent },
-  { path: "filieres", component: FiliereComponent },
-  { path: "specialites", component: SpecialiteComponent },
-  { path: "classes", component: ClasseComponent },
+  { path: "etudiants", component: EtudiantComponent, canActivate:[AuthGuardService] },
+  { path: "enseignents", component: EnseignentComponent, canActivate:[AuthGuardService] },
+  { path: "departements", component: DepartementComponent, canActivate:[AuthGuardService] },
+  { path: "filieres", component: FiliereComponent, canActivate:[AuthGuardService] },
+  { path: "specialites", component: SpecialiteComponent, canActivate:[AuthGuardService] },
+  { path: "classes", component: ClasseComponent, canActivate:[AuthGuardService] },
 ];
 
 @NgModule({

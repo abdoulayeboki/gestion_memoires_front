@@ -4,8 +4,8 @@ import { DefaultComponent } from './core/default/default.component';
 import { LoginComponent } from './core/login/login.component';
 
 const routes: Routes = [
-  // { path: '', component: DefaultComponent },
-  { path: '', component: LoginComponent },
+  { path: '', component: DefaultComponent },
+  // { path: '', component: LoginComponent },
   {path: 'login', component: LoginComponent }
 ];
 

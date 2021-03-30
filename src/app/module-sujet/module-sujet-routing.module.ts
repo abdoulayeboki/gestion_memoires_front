@@ -11,11 +11,11 @@ const routes: Routes = [
   {
     path: "sujets", component: SujetComponent, canActivate:[AuthGuardService] ,
     children: [
-      { path: "sujets_list", component: SujetListComponent, },
-      { path: "sujet_add", component: SujetAddComponent, },
-      { path: "sujet_edit/:id", component: SujetEditComponent, },
-      { path: "sujet_view/:id", component: SujetViewComponent, },
-      {path: "", component: SujetListComponent,}
+      { path: "sujets_list", component: SujetListComponent, canActivate:[AuthGuardService] },
+      { path: "sujet_add", component: SujetAddComponent, canActivate:[AuthGuardService] },
+      { path: "sujet_edit/:id", component: SujetEditComponent, canActivate:[AuthGuardService] },
+      { path: "sujet_view/:id", component: SujetViewComponent, canActivate:[AuthGuardService] },
+      {path: "", component: SujetListComponent, canActivate:[AuthGuardService]}
     ]
   }
 ];

@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
                   (token:Token ) => {
                       this.authService.setSession(token)
                       this.authService.startRefreshToken()
-                      this.router.navigateByUrl('etudiants');
+                      this.router.navigateByUrl('');
                   }
               );
       }

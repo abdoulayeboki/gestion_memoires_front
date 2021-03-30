@@ -27,7 +27,7 @@
                                     <thead>
                                         <tr>
                                             <th>titre</th>
-                                            <!-- <th>description</th> -->
+                                            <th>Proprietaire</th>
                                             <th>Date creation</th>
                                             <th>Etat du sujet</th>
                                             <th>Editer</th>
@@ -37,7 +37,7 @@
                                     <tbody>
                                         <tr *ngFor="let sujet of result.data">
                                             <td>{{sujet.titre}} </td>
-                                            <!-- <td>{{sujet.description}} </td> -->
+                                            <td>{{sujet.owner}} </td>
                                             <td>{{sujet.createdDate}}</td>
                                             <td>{{sujet.etatSujet}}</td>
                                             <td><button [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a><span class="fa fa-pencil"></span></a></button> </td>
