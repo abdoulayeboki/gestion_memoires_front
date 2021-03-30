@@ -12,6 +12,7 @@ import { ModuleSujetModule } from './module-sujet/module-sujet.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './core/login/login.component';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
+import {  ErrorInterceptorService } from './core/services/error-interceptor.service';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AuthInterceptorService } from './core/services/auth-interceptor.service
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
 })

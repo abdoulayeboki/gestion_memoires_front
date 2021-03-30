@@ -1,5 +1,6 @@
 export interface User {
-  id?: number;
+  user_id?: number;
   username: string;
   password: string;
+  exp?: any;          // la date d'expiration du token
 }

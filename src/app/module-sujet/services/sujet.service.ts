@@ -3,13 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Sujet } from '../models/sujet';
+import { AuthServiceService } from '../../core/services/auth-service.service';
+import { User } from '../../core/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SujetService {
-
-  constructor(private http: HttpClient) {
+  currentUser : User ;
+  constructor(private http: HttpClient, private authService: AuthServiceService) {
+     this.currentUser = authService.currentUser;
   }
 
   getSujets(etatSujet: string=""): Observable<Sujet[]> {
@@ -19,7 +22,7 @@ export class SujetService {
     return this.http.get<Sujet>(`${environment.apiUrl}/sujets/${id}`)
   }
   postSujets(sujet: Sujet): Observable<Sujet> {
-    sujet.owner=1
+    sujet.owner =this.currentUser.user_id
     return this.http.post<Sujet>(`${environment.apiUrl}/sujets`,sujet)
   }
   updateSujet(sujet: Sujet): Observable<Sujet> {

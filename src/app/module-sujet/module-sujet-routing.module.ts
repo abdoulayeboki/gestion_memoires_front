@@ -5,10 +5,11 @@ import { SujetListComponent } from './components/sujet/sujet-list/sujet-list.com
 import { SujetAddComponent } from './components/sujet/sujet-add/sujet-add.component';
 import { SujetEditComponent } from './components/sujet/sujet-edit/sujet-edit.component';
 import { SujetViewComponent } from './components/sujet/sujet-view/sujet-view.component';
+import { AuthGuardService } from '../core/services/auth-guard.service';
 
 const routes: Routes = [
   {
-    path: "sujets", component: SujetComponent,
+    path: "sujets", component: SujetComponent, canActivate:[AuthGuardService] ,
     children: [
       { path: "sujets_list", component: SujetListComponent, },
       { path: "sujet_add", component: SujetAddComponent, },
