@@ -34,17 +34,17 @@ export class SujetListComponent implements OnInit {
     // recuperons le personnel actuellement connecte
     this.authService.userObservable.pipe(
       concatMap(user => this.authService.getUserById(user.id) )
-    ).subscribe(user => this.personnel = user.personnel)
+    ).subscribe(user => { this.personnel = user.personnel; console.log(user) })
     
   }
   
   // owner permet de verifier si la personne est proprietaire du sujet pour pouvoir modifie ou non
   owner(sujet:Sujet): Boolean{
-    if (this.personnel?.id==sujet.personnel)
+    if (this.personnel?.id==sujet.personnel?.id && sujet.etatSujet=="PROPOSE")
       return true
     else return false
   }
-  getSujets(etatSujet:string ="PROPOSE") {
+  getSujets(etatSujet:string ="") {
     this.sujets$ = this.sujetService.getSujets(etatSujet).pipe(
       map((data) => {
         console.log(data)

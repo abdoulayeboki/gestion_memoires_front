@@ -10,10 +10,11 @@ import { SujetAddComponent } from './components/sujet/sujet-add/sujet-add.compon
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SujetEditComponent } from './components/sujet/sujet-edit/sujet-edit.component';
 import { SujetViewComponent } from './components/sujet/sujet-view/sujet-view.component';
+import { PostulerAddComponent } from './components/postuler/postuler-add/postuler-add.component';
 
 
 @NgModule({
-  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent, SujetEditComponent, SujetViewComponent],
+  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent],
   imports: [
     CommonModule,
     ModuleSujetRoutingModule,

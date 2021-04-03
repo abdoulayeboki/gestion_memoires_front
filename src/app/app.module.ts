@@ -21,7 +21,7 @@ import {  ErrorInterceptorService } from './core/services/error-interceptor.serv
     HeaderComponent,
     SidebarComponent,
     DefaultComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

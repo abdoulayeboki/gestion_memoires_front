@@ -12,10 +12,7 @@ import { Personnel } from '../../administration/models/personnel';
   providedIn: 'root'
 })
 export class SujetService {
-  user?: User;
-  personnel?: Personnel
-  constructor(private http: HttpClient, private authService: AuthServiceService) {
-     this.authService.userObservable.subscribe(user =>this.user=user)
+  constructor(private http: HttpClient) {
   }
 
   getSujets(etatSujet: string=""): Observable<Sujet[]> {
@@ -24,20 +21,9 @@ export class SujetService {
   getSujet(id: number): Observable<Sujet> {
     return this.http.get<Sujet>(`${environment.apiUrl}/sujets/${id}/`)
   }
-
   postSujets(sujet: Sujet): Observable<Sujet>{
-    return this.authService.getUserById(this.user?.id).pipe(
-      concatMap(
-        (user) => {
-          sujet.personnel = user.personnel?.id;
-          return this.http.post<Sujet>(`${environment.apiUrl}/sujets`, sujet);
-        }
-      ),
-      catchError(error => of(error))
-    );
-    
+    return this.http.post<Sujet>(`${environment.apiUrl}/sujets`, sujet);
   }
-
 
   updateSujet(sujet: Sujet): Observable<Sujet> {
     return this.http.put<Sujet>(`${environment.apiUrl}/sujets/${sujet.id}/`,sujet)

@@ -6,6 +6,7 @@ import { SujetAddComponent } from './components/sujet/sujet-add/sujet-add.compon
 import { SujetEditComponent } from './components/sujet/sujet-edit/sujet-edit.component';
 import { SujetViewComponent } from './components/sujet/sujet-view/sujet-view.component';
 import { AuthGuardService } from '../core/services/auth-guard.service';
+import { PostulerAddComponent } from './components/postuler/postuler-add/postuler-add.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
       { path: "sujets_list", component: SujetListComponent, canActivate:[AuthGuardService] },
       { path: "sujet_add", component: SujetAddComponent, canActivate:[AuthGuardService] },
       { path: "sujet_edit/:id", component: SujetEditComponent, canActivate:[AuthGuardService] },
-      { path: "sujet_view/:id", component: SujetViewComponent, canActivate:[AuthGuardService] },
+      { path: "sujet_view/:id", component: SujetViewComponent, canActivate: [AuthGuardService] },
+      { path: "postuler_add", component: PostulerAddComponent, canActivate:[AuthGuardService] },
       {path: "", component: SujetListComponent, canActivate:[AuthGuardService]}
     ]
   }

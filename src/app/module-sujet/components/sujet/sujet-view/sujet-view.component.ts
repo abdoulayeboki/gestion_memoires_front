@@ -27,6 +27,7 @@ export class SujetViewComponent implements OnInit {
     this.sujetService.getSujet(this.idSujet)
       .subscribe(sujet => {
           this.sujet = sujet
+          console.log(sujet.personnelPostuler)
       });
    // recuperons le personnel actuellement connecte
    this.authService.userObservable.pipe(
@@ -48,8 +49,12 @@ export class SujetViewComponent implements OnInit {
   }
   // owner permet de verifier si la personne est proprietaire du sujet pour pouvoir modifie ou non
   owner(sujet:Sujet): Boolean{
-    if (this.personnel?.id==sujet.personnel)
+    if (this.personnel?.id==sujet.personnel?.id && sujet.etatSujet=="PROPOSE" )
       return true
     else return false
+  }
+
+  postuler() {
+    this.router.navigate(['postuler_add'])
   }
 }

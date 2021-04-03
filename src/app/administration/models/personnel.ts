@@ -1,5 +1,5 @@
 
 export interface Personnel {
-  id?: number;
-
+  id: number;
+  nom: string;
 }

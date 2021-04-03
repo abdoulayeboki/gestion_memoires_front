@@ -26,6 +26,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>titre</th>
                                             <th>Proprietaire</th>
                                             <th>Date creation</th>
@@ -36,8 +37,9 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let sujet of result.data">
+                                            <td>{{sujet.id}} </td>
                                             <td>{{sujet.titre}} </td>
-                                            <td>{{sujet.personnel}} </td>
+                                            <td>{{sujet.personnel?.nom}} </td>
                                             <td>{{sujet.createdDate}}</td>
                                             <td>{{sujet.etatSujet}}</td>
                                             <td><button *ngIf="owner(sujet)" [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a><span class="fa fa-pencil"></span></a></button> </td>

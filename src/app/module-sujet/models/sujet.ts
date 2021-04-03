@@ -1,8 +1,12 @@
+import { Personnel } from "src/app/administration/models/personnel";
+
 export interface Sujet {
   id?: number;
   titre: string;
   description: string;
-  personnel?: number;
+  personnel?: Personnel;
   createdDate?: Date;
   etatSujet?: string;
+  personnelPostuler?: Personnel[]
+  personnelAccorder?:Personnel[]
 }
