@@ -69,6 +69,10 @@ startRefreshToken() {
 stopRefreshToken() {
   clearTimeout(this.refreshTimeout)
 }
+
+getUserById(id: number=0): Observable<User>{
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}`) 
+}
 // public isLoggedIn() {
 //     return moment().isBefore(this.getExpiration());
 // }

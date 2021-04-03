@@ -31,7 +31,7 @@ export class SujetEditComponent implements OnInit, OnDestroy {
       .subscribe(sujet=>{
         this.sujetFormGroup = this.fb.group({
           id: [sujet.id, Validators.required],
-          owner: [sujet.owner, Validators.required],
+          personnel: [sujet.personnel, Validators.required],
           titre:[sujet.titre,Validators.required],
           description:[sujet.description,Validators.required],
         })

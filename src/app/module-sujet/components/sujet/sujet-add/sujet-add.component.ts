@@ -28,10 +28,12 @@ export class SujetAddComponent implements OnInit {
     if (this.sujetFormGroup?.invalid) return;
     console.log(this.sujetFormGroup?.value)
     this.sujetService.postSujets(this.sujetFormGroup?.value)
-      .subscribe(data=>{
+      .subscribe((data)=>{
         alert("Success: sujet enregistre");
         this.router.navigate(['sujets'])
-      });
+      },
+      // error => console.log(error)
+    );
   }
   onCancel() {
     this.router.navigate(['sujets'])

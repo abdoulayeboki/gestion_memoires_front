@@ -10,10 +10,12 @@ import { User } from './core/models/user';
 export class AppComponent {
   title = 'gestion-memoires-front';
   user?: User;
+  personnel?: any;
   constructor(
     private  authService: AuthServiceService
   ) {
     this.authService.userObservable.subscribe(user => this.user = user)
+    // this.authService.getUserById(this.user?.id).subscribe(user => this.personnel = user)
   }
 }
 

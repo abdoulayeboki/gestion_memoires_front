@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SujetService } from '../../../services/sujet.service';
 import { Sujet } from '../../../models/sujet';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthServiceService } from '../../../../core/services/auth-service.service';
+import { Personnel } from '../../../../administration/models/personnel';
+import { concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sujet-view',
@@ -11,10 +14,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SujetViewComponent implements OnInit {
   idSujet: number = 0;
   sujet?: Sujet;
+  personnel?: Personnel;
   constructor(
     private sujetService: SujetService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private authService:AuthServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +28,10 @@ export class SujetViewComponent implements OnInit {
       .subscribe(sujet => {
           this.sujet = sujet
       });
-
+   // recuperons le personnel actuellement connecte
+   this.authService.userObservable.pipe(
+    concatMap(user => this.authService.getUserById(user.id) )
+  ).subscribe(user => this.personnel = user.personnel)
   }
 
   deleteSujet() {
@@ -38,5 +46,10 @@ export class SujetViewComponent implements OnInit {
   onCancel() {
     this.router.navigate(['sujets'])
   }
-
+  // owner permet de verifier si la personne est proprietaire du sujet pour pouvoir modifie ou non
+  owner(sujet:Sujet): Boolean{
+    if (this.personnel?.id==sujet.personnel)
+      return true
+    else return false
+  }
 }

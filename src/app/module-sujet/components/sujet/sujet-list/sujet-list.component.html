@@ -37,10 +37,10 @@
                                     <tbody>
                                         <tr *ngFor="let sujet of result.data">
                                             <td>{{sujet.titre}} </td>
-                                            <td>{{sujet.owner}} </td>
+                                            <td>{{sujet.personnel}} </td>
                                             <td>{{sujet.createdDate}}</td>
                                             <td>{{sujet.etatSujet}}</td>
-                                            <td><button [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a><span class="fa fa-pencil"></span></a></button> </td>
+                                            <td><button *ngIf="owner(sujet)" [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a><span class="fa fa-pencil"></span></a></button> </td>
                                             <td><button [routerLink]="['sujet_view', sujet.id]" class=" btn btn-outline-success "><a><span class="fa fa-eye "></span></a></button>
                                             </td>
                                         </tr>

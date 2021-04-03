@@ -1,6 +1,9 @@
+import { Personnel } from "src/app/administration/models/personnel";
+
 export interface User {
-  user_id?: number;
+  id?: number;
   username: string;
   password: string;
+  personnel?: Personnel;
   exp?: any;          // la date d'expiration du token
 }
