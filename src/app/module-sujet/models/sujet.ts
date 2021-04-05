@@ -7,6 +7,6 @@ export interface Sujet {
   personnel?: Personnel;
   createdDate?: Date;
   etatSujet?: string;
-  personnelPostuler?: Personnel[]
-  personnelAccorder?:Personnel[]
+  personnelPostuler?: any;
+  personnelAccorder?: any;
 }

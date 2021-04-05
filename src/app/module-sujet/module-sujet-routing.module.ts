@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: "sujet_add", component: SujetAddComponent, canActivate:[AuthGuardService] },
       { path: "sujet_edit/:id", component: SujetEditComponent, canActivate:[AuthGuardService] },
       { path: "sujet_view/:id", component: SujetViewComponent, canActivate: [AuthGuardService] },
-      { path: "postuler_add", component: PostulerAddComponent, canActivate:[AuthGuardService] },
+      { path: "postuler_add/:id", component: PostulerAddComponent, canActivate:[AuthGuardService] },
       {path: "", component: SujetListComponent, canActivate:[AuthGuardService]}
     ]
   }

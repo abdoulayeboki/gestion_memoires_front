@@ -1,1 +1,31 @@
-<p>postuler-add works!</p>
+<div class="ibox-content" *ngIf="postulerFormGroup">
+    <form [formGroup]="postulerFormGroup" (ngSubmit)="onSubmit()">
+        <div class="form-group  row"><label class="col-sm-2 col-form-label">CV</label>
+            <div class="col-sm-10">
+                <input formControlName="cv" required [ngClass]="{'is-invalid':submitted && postulerFormGroup.controls.cv.errors}" type="text" class="form-control">
+                <div *ngIf="submitted && postulerFormGroup.controls.cv.errors" class="invalid-feedback alert alert-danger ">
+                    <div class="col-sm-10" *ngIf="postulerFormGroup.controls.cv.errors.required">cv is Required</div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="hr-line-dashed"></div>
+        <div class="form-group row"><label class="col-sm-2 col-form-label">Motivation</label>
+            <div class="col-sm-10"><textarea [ngClass]="{'is-invalid':submitted && postulerFormGroup.controls.motivation.errors}" formControlName="motivation" type="text" rows="10" class="form-control">       
+            </textarea>
+                <div *ngIf="submitted && postulerFormGroup.controls.motivation.errors" class="invalid-feedback alert alert-danger ">
+                    <div class="col-sm-10" *ngIf="postulerFormGroup.controls.motivation.errors.required">Description is Required</div>
+                </div>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group row">
+            <div class="col-sm-4 col-sm-offset-2">
+                <button (click)="onCancel()" class="btn btn-white btn-sm" type="submit">Cancel</button>
+                <button [disabled]="!postulerFormGroup.valid" class="btn btn-primary btn-sm" type="submit">Save changes</button>
+            </div>
+        </div>
+    </form>
+</div>

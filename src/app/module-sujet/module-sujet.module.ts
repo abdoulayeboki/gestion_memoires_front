@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SujetEditComponent } from './components/sujet/sujet-edit/sujet-edit.component';
 import { SujetViewComponent } from './components/sujet/sujet-view/sujet-view.component';
 import { PostulerAddComponent } from './components/postuler/postuler-add/postuler-add.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PostulerAddComponent } from './components/postuler/postuler-add/postule
     ModuleSujetRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxPaginationModule,
   ],
   providers: [
     SujetService,

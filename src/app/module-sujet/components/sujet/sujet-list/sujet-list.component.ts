@@ -16,9 +16,10 @@ import { Personnel } from '../../../../administration/models/personnel';
   styleUrls: ['./sujet-list.component.scss']
 })
 export class SujetListComponent implements OnInit {
-  sujets$: Observable<AppDataState<Sujet[]>> | undefined
+  sujets$: Observable<AppDataState<any>> | undefined
   readonly DataStateEnum = DataStateEnum;
   personnel?:Personnel
+   p: number = 1;
   constructor(
     private sujetService: SujetService,
     private sujetObservableService: SujetObservableService,

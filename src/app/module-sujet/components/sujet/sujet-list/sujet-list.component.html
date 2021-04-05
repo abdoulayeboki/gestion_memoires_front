@@ -12,6 +12,22 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
+                        <div class="col-sm-3  m-b-xs">
+                            <select #d class="form-control-sm form-control input-s-sm inline">
+                                <option value="">Afficher par  Departement </option>
+                                <option ></option>
+                        </select>
+                        </div>
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-5">
+                            <div class="input-group"><input placeholder="Search By Prenom, Nom , CNI" type="text" class="form-control form-control-sm">
+                                <span class="input-group-append"> 
+                               <button type="button"  class="btn btn-sm btn-primary">Go!
+                            </button> </span></div>
+
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-3"></div>
                     </div>
                     <ng-container *ngIf="(sujets$ | async) as result" [ngSwitch]="result.dataState">
@@ -36,19 +52,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let sujet of result.data">
+                                        <tr *ngFor="let sujet of result.data | paginate:{itemsPerPage: 4, currentPage: p }">
                                             <td>{{sujet.id}} </td>
                                             <td>{{sujet.titre}} </td>
                                             <td>{{sujet.personnel?.nom}} </td>
                                             <td>{{sujet.createdDate}}</td>
                                             <td>{{sujet.etatSujet}}</td>
                                             <td><button *ngIf="owner(sujet)" [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a><span class="fa fa-pencil"></span></a></button> </td>
-                                            <td><button [routerLink]="['sujet_view', sujet.id]" class=" btn btn-outline-success "><a><span class="fa fa-eye "></span></a></button>
-                                            </td>
+                                            <td><button [routerLink]="['sujet_view', sujet.id]" class=" btn btn-outline-success "><a><span class="fa fa-eye "></span></a></button></td>
                                         </tr>
                                     </tbody>
                                     <!-- [routerLink]="[ 'sujet_edit', sujet.id] (click)="onUpdateSujet(sujet.id)" -->
                                 </table>
+                                <div id="pagination">
+                                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                                </div>
                             </div>
                         </ng-container>
                     </ng-container>
