@@ -19,7 +19,7 @@
                         <th>Telephon</th>
                         <th>Email</th>
                         <th>Motivation/CV</th>
-                        <!-- <th>CV</th> -->
+                        <th>Accorde</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,9 @@
                         <td><button class="btn btn-outline-primary" (click)="openMotivation(personnel)"><a><span class="fa fa-eye "></span></a></button>
                             <button class="btn btn-outline-primary" (click)="openCv(personnel)"><a><span class="fa fa-eye "></span></a></button>
                         </td>
-                        <!-- <td><button class="btn btn-outline-primary" (click)="openCv(personnel)"><a><span class="fa fa-eye "></span></a></button></td> -->
+                        <td><button [ngClass]="personnel.accorde?'btn btn-outline-success':'btn btn-outline-danger'" class="btn btn-outline-primary" (click)="accorderSujet(personnel)">
+                            <a><span *ngIf="personnel.accorde">Annuler</span>
+                                <span *ngIf="!personnel.accorde">Accorder</span></a></button></td>
                     </tr>
                 </tbody>
             </table>

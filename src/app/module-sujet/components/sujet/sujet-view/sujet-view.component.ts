@@ -4,7 +4,7 @@ import { Sujet } from '../../../models/sujet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../../../../core/services/auth-service.service';
 import { Personnel } from '../../../../administration/models/personnel';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, concatMapTo } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalPostulerComponent } from '../../postuler/modal-postuler/modal-postuler.component';
 import { PostulerService } from '../../../services/postuler.service';
@@ -21,6 +21,7 @@ export class SujetViewComponent implements OnInit {
   personnel?: Personnel;
   personnelPostuler: any
   p:number=1;
+  accorde: boolean = false
   constructor(
     private sujetService: SujetService,
     private activatedRoute: ActivatedRoute,
@@ -32,16 +33,31 @@ export class SujetViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(param => {this.idSujet = param['id']})
-    this.sujetService.getSujet(this.idSujet)
-      .subscribe(sujet => {
-        this.sujet = sujet
-        this.personnelPostuler = sujet.personnelPostuler
-          console.log(sujet)
-      });
+    this.getData()
+      
    // recuperons le personnel actuellement connecte
    this.authService.userObservable.pipe(
     concatMap(user => this.authService.getUserById(user.id) )
    ).subscribe(user => { this.personnel = user.personnel; })
+  }
+  getData() {
+    this.sujetService.getSujet(this.idSujet)
+      .subscribe(sujet => {
+        this.sujet = sujet
+        this.personnelPostuler =[]
+        // verification si la personne à été accorde pour ajoute un attribut accorde sur l'objet personnel
+        for (let p of sujet.personnelPostuler){
+          this.postulerService.getAccorderBySujetAndPersonnel(this.sujet?.id, p.id).subscribe(
+            (postuler: Postuler[]) => {
+              if (postuler.length > 0)
+                p.accorde = true;
+              else p.accorde = false
+              this.personnelPostuler.push(p)
+            }
+          );
+        }
+         
+      });
   }
 
   deleteSujet() {
@@ -63,9 +79,7 @@ export class SujetViewComponent implements OnInit {
     else return false
   }
 
-  postuler() {
-    this.router.navigate(['postuler_add'])
-  }
+
   // pour voir si la personne peut postuler
   peutPostuler(sujet:Sujet):Boolean {
     if (sujet.personnel.profil == this.personnel?.profil)
@@ -98,5 +112,30 @@ export class SujetViewComponent implements OnInit {
         modalRef.componentInstance.motivation = postuler[0].cv;
      }
     )   
+  }
+
+  accorderSujet(personnel: Personnel) {
+    if (!personnel.accorde) {
+    if(confirm("Etes vous sûr de lui accorde ce sujet"))
+    this.postulerService.postAccorderSujets(this.sujet?.id, personnel.id).subscribe(
+      () => {
+        this.getData()
+        alert("Success: le sujet à bien été accordé")
+      },
+      error =>alert("Erreur: ce sujet a été dèjà accordé")
+    )
+    } else {
+      if (confirm("Etes vous sûr d'annuler"))
+        this.postulerService.getAccorderBySujetAndPersonnel(this.sujet?.id, personnel.id).pipe(
+        ).subscribe(
+          (postuler: Postuler[]) => {
+            this.postulerService.deleteAccorderSujets(postuler[0]).subscribe(
+              () => { this.getData(); alert("Success: accord annulé") }
+            )
+        }
+      )
+    }
+    
+    
   }
 }
