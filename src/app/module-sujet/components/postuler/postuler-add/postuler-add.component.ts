@@ -39,7 +39,7 @@ export class PostulerAddComponent implements OnInit {
         alert("Success:vous avez postuler ");
         this.router.navigate(['sujets'])
       },
-      // error => console.log(error)
+      error => console.log(error)
     );
   }
   onCancel() {

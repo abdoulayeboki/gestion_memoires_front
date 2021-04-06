@@ -5,6 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../../../../core/services/auth-service.service';
 import { Personnel } from '../../../../administration/models/personnel';
 import { concatMap } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalPostulerComponent } from '../../postuler/modal-postuler/modal-postuler.component';
+import { PostulerService } from '../../../services/postuler.service';
+import { Postuler } from '../../../models/postuler';
 
 @Component({
   selector: 'app-sujet-view',
@@ -15,24 +19,29 @@ export class SujetViewComponent implements OnInit {
   idSujet: number = 0;
   sujet?: Sujet;
   personnel?: Personnel;
+  personnelPostuler: any
+  p:number=1;
   constructor(
     private sujetService: SujetService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private authService:AuthServiceService,
+    private authService: AuthServiceService,
+    private modalService: NgbModal,
+    private postulerService:PostulerService,
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(param => {this.idSujet = param['id']})
     this.sujetService.getSujet(this.idSujet)
       .subscribe(sujet => {
-          this.sujet = sujet
-          console.log(sujet.personnelPostuler)
+        this.sujet = sujet
+        this.personnelPostuler = sujet.personnelPostuler
+          console.log(sujet)
       });
    // recuperons le personnel actuellement connecte
    this.authService.userObservable.pipe(
     concatMap(user => this.authService.getUserById(user.id) )
-  ).subscribe(user => this.personnel = user.personnel)
+   ).subscribe(user => { this.personnel = user.personnel; })
   }
 
   deleteSujet() {
@@ -48,7 +57,7 @@ export class SujetViewComponent implements OnInit {
     this.router.navigate(['sujets'])
   }
   // owner permet de verifier si la personne est proprietaire du sujet pour pouvoir modifie ou non
-  owner(sujet:Sujet): Boolean{
+  owner(sujet: Sujet): Boolean{
     if (this.personnel?.id==sujet.personnel?.id && sujet.etatSujet=="PROPOSE" )
       return true
     else return false
@@ -56,5 +65,38 @@ export class SujetViewComponent implements OnInit {
 
   postuler() {
     this.router.navigate(['postuler_add'])
+  }
+  // pour voir si la personne peut postuler
+  peutPostuler(sujet:Sujet):Boolean {
+    if (sujet.personnel.profil == this.personnel?.profil)
+      return false
+    else if (sujet.personnel.profil==="AUTRE"  && this.personnel?.profil==="ENSEIGNANT")
+      return false
+    else if (sujet.personnel.profil === "ENSEIGNANT" && this.personnel?.profil === "AUTRE")
+      return false
+    else
+      return true
+  }
+  // ouvrir le modal pour voir la motivation de la personne
+  openMotivation(personnel:Personnel) {
+    this.postulerService.getPostulerBySujetAndPersonnel(this.sujet?.id, personnel.id).subscribe(
+      (postuler: Postuler[]) => {
+        console.log(postuler)
+        const modalRef = this.modalService.open(ModalPostulerComponent);
+        modalRef.componentInstance.titre = "Motivation";
+        modalRef.componentInstance.motivation = postuler[0].motivation;
+     }
+    )   
+  }
+
+  openCv(personnel:Personnel) {
+    this.postulerService.getPostulerBySujetAndPersonnel(this.sujet?.id, personnel.id).subscribe(
+      (postuler: Postuler[]) => {
+        console.log(postuler)
+        const modalRef = this.modalService.open(ModalPostulerComponent);
+        modalRef.componentInstance.titre = "CV";
+        modalRef.componentInstance.motivation = postuler[0].cv;
+     }
+    )   
   }
 }

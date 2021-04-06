@@ -4,7 +4,7 @@ export interface Sujet {
   id?: number;
   titre: string;
   description: string;
-  personnel?: Personnel;
+  personnel: Personnel;
   createdDate?: Date;
   etatSujet?: string;
   personnelPostuler?: any;

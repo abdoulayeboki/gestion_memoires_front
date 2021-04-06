@@ -16,4 +16,7 @@ export class PostulerService {
   postPostulerSujets(postuler: Postuler): Observable<Postuler>{
     return this.http.post<Postuler>(`${environment.apiUrl}/sujet_postuler`, postuler);
   }
+  getPostulerBySujetAndPersonnel(idSujet:number|any,idPersonnel: number):Observable<Postuler[]> {
+    return this.http.get<Postuler[]>(`${environment.apiUrl}/sujet_postuler?sujet=${idSujet}&personnel=${idPersonnel}`);
+  }
 }

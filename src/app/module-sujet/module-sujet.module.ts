@@ -12,16 +12,19 @@ import { SujetEditComponent } from './components/sujet/sujet-edit/sujet-edit.com
 import { SujetViewComponent } from './components/sujet/sujet-view/sujet-view.component';
 import { PostulerAddComponent } from './components/postuler/postuler-add/postuler-add.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ModalPostulerComponent } from './components/postuler/modal-postuler/modal-postuler.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent],
+  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent, ModalPostulerComponent],
   imports: [
     CommonModule,
     ModuleSujetRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
+    NgbModule,
   ],
   providers: [
     SujetService,
