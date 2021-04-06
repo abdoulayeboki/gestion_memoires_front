@@ -1,21 +1,16 @@
 <div *ngIf="sujet" class="col-lg-12">
-    <!-- <div class="ibox"> -->
-    <div class="ibox-title" *ngIf="personnelPostuler.length>0; then candidat else noCandidat">
-    </div>
-    <!-- </div> -->
-    <ng-template #noCandidat>
-        <div class="alert alert-dark">
-
-            Aucun candidat n'a postulé à ce sujet</div>
-    </ng-template>
+    <div class="ibox-tools">
+        <button *ngIf="peutPostuler(sujet)" [routerLink]="['/sujets/postuler_add', sujet.id]" class="btn btn-outline-primary quitter ">Postuler </button>
+        <button (click)="onCancel()" class="btn-outline-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
+        <button *ngIf="owner(sujet)" (click)="deleteSujet()" class="btn btn-outline-danger fa fa-trash"> </button>
+    </div><br><br><br>
     <ng-template class="row" #candidat>
         <h4>liste des postulant</h4>
         <div class="table-responsive ">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Prenom </th>
-                        <th>Nom </th>
+                        <th>Prenom et Nom</th>
                         <th>Telephon</th>
                         <th>Email</th>
                         <th>Motivation/CV</th>
@@ -24,38 +19,33 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let personnel of personnelPostuler | paginate:{itemsPerPage: 4, currentPage: p }">
-                        <td>{{personnel.prenom}} </td>
-                        <td>{{personnel.nom}}</td>
+                        <td>{{personnel.prenom}} {{personnel.nom}} </td>
                         <td>{{personnel.telephon}}</td>
                         <td>{{personnel.email}}</td>
-                        <td><button class="btn btn-outline-primary" (click)="openMotivation(personnel)"><a><span class="fa fa-eye "></span></a></button>
+                        <td><button class="motivation btn btn-success" (click)="openMotivation(personnel)"><a><span class="fa fa-eye "></span></a></button>
                             <button class="btn btn-outline-primary" (click)="openCv(personnel)"><a><span class="fa fa-eye "></span></a></button>
                         </td>
                         <td><button [ngClass]="personnel.accorde?'btn btn-outline-success':'btn btn-outline-danger'" class="btn btn-outline-primary" (click)="accorderSujet(personnel)">
-                            <a><span *ngIf="personnel.accorde">Annuler</span>
-                                <span *ngIf="!personnel.accorde">Accorder</span></a></button></td>
+                            <a><span *ngIf="personnel.accorde">Accorder</span>
+                                <span *ngIf="!personnel.accorde">Non Accorder</span></a></button></td>
                     </tr>
                 </tbody>
             </table>
             <div id="pagination">
                 <pagination-controls (pageChange)="p=$event"></pagination-controls>
             </div>
+
         </div>
     </ng-template>
-    <div class="ibox">
-        <div class="ibox-title">
-            <h5> Titre: {{sujet.titre}} </h5>
-            <div class="ibox-tools">
-                <button *ngIf="peutPostuler(sujet)" [routerLink]="['/sujets/postuler_add', sujet.id]" class="btn btn-outline-primary quitter ">Postuler </button>
-                <button (click)="onCancel()" class="btn-outline-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
-                <button *ngIf="owner(sujet)" (click)="deleteSujet()" class="btn btn-outline-danger fa fa-trash"> </button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox-title" *ngIf="personnelPostuler.length>0; then candidat else noCandidat">
             </div>
-        </div>
-        <div class="ibox-content">
-            <div class="scroll_content">
-                <h2>Description</h2>
-                <p>{{sujet.description}} </p>
-            </div>
+            <ng-template #noCandidat>
+                <div class="alert alert-dark">
+                    Aucun candidat n'a postulé à ce sujet</div>
+            </ng-template>
         </div>
     </div>
+
 </div>

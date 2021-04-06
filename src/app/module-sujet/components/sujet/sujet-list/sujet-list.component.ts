@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from '../../../../core/services/auth-service.service';
 import { User } from '../../../../core/models/user';
 import { Personnel } from '../../../../administration/models/personnel';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalPostulerComponent } from '../../postuler/modal-postuler/modal-postuler.component';
 
 @Component({
   selector: 'app-sujet-list',
@@ -24,7 +26,8 @@ export class SujetListComponent implements OnInit {
     private sujetService: SujetService,
     private sujetObservableService: SujetObservableService,
     private router: Router,
-    private authService:AuthServiceService
+    private authService: AuthServiceService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit(): void {
@@ -67,7 +70,11 @@ export class SujetListComponent implements OnInit {
       case TypeEvenementSujet.ALL: this.getSujets(); break;
     }
   }
- 
+  openDescription(description:string) {
+        const modalRef = this.modalService.open(ModalPostulerComponent);
+        modalRef.componentInstance.titre = "Description";
+        modalRef.componentInstance.motivation = description;
+  }
   // onUpdateSujet(id: any) {
   //     this.router.navigate(['sujet_edit', id]);
   // }

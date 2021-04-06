@@ -44,6 +44,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>titre</th>
+                                            <th>Description</th>
                                             <th>Proprietaire</th>
                                             <th>Date creation</th>
                                             <th>Etat du sujet</th>
@@ -55,11 +56,16 @@
                                         <tr *ngFor="let sujet of result.data | paginate:{itemsPerPage: 4, currentPage: p }">
                                             <td>{{sujet.id}} </td>
                                             <td>{{sujet.titre}} </td>
+                                            <td><button class=" btn btn-success" (click)="openDescription(sujet.description)"><a>
+                                                <span class="fa fa-eye "></span></a></button>
+                                            </td>
                                             <td>{{sujet.personnel?.nom}} </td>
                                             <td>{{sujet.createdDate}}</td>
                                             <td>{{sujet.etatSujet}}</td>
-                                            <td><button *ngIf="owner(sujet)" [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a><span class="fa fa-pencil"></span></a></button> </td>
-                                            <td><button [routerLink]="['sujet_view', sujet.id]" class=" btn btn-outline-success "><a><span class="fa fa-eye "></span></a></button></td>
+                                            <td><button *ngIf="owner(sujet)" [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a>
+                                                <span class="fa fa-pencil"></span></a></button> </td>
+                                            <td><button [routerLink]="['sujet_view', sujet.id]" class=" btn btn-outline-success "><a>
+                                                <span class="fa fa-eye "></span></a></button></td>
                                         </tr>
                                     </tbody>
                                     <!-- [routerLink]="[ 'sujet_edit', sujet.id] (click)="onUpdateSujet(sujet.id)" -->
