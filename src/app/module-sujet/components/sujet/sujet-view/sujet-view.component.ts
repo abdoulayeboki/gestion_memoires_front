@@ -143,7 +143,7 @@ export class SujetViewComponent implements OnInit {
     if(confirm("Etes vous sûr de lui accorde ce sujet"))
     this.postulerService.postAccorderSujets(this.sujet?.id, personnel.id).subscribe(
       () => {
-        this.ngOnInit()
+        // this.ngOnInit()
         alert("Success: le sujet à bien été accordé")
       },
       error =>alert("Erreur: ce sujet a été dèjà accordé")
@@ -154,7 +154,10 @@ export class SujetViewComponent implements OnInit {
         ).subscribe(
           (postuler: Postuler[]) => {
             this.postulerService.deleteAccorderSujets(postuler[0]).subscribe(
-              () => { this.ngOnInit(); alert("Success: accord annulé") }
+              () => {
+                // this.ngOnInit();
+                alert("Success: accord annulé")
+              }
             )
         }
       )

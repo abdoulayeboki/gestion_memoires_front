@@ -1,0 +1,40 @@
+<ng-container *ngIf="(accordes$ | async) as result" [ngSwitch]="result.dataState">
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+        Loading .....
+    </ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+        <div class="alert alert-danger"> {{result.errorMessage}} </div>
+    </ng-container>
+    <div class="offset-sm-11">
+        <button [routerLink]="[ '/sujets']" class="btn-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
+    </div><br>
+    <ng-container class="row" *ngSwitchCase="DataStateEnum.LOADED">
+        <div class="table-responsive offset-sm-1 col-sm-10">
+            <table class="table table-striped ">
+                <caption>Liste des accordes</caption>
+                <thead class="table-success">
+                    <tr>
+                        <th>ID</th>
+                        <th>Sujet</th>
+                        <th>Personnel</th>
+                        <th>Valide</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let accorde of result.data | paginate:{itemsPerPage: 5, currentPage: p }">
+                        <td>{{accorde.id}} </td>
+                        <td>{{accorde.sujet}} </td>
+                        <td>{{accorde.personnel}} </td>
+                        <td><button (click)="editAccorder(accorde)" [ngClass]="accorde.valide?'btn btn-primary':'btn btn-danger'"> <a><span *ngIf="accorde.valide" class="fa 
+                            fa-toggle-on"></span>
+                            <span *ngIf="!accorde.valide" class="fa  fa-toggle-off"></span></a></button></td>
+                    </tr>
+                </tbody>
+                <!-- [routerLink]="[ 'accorde_edit', accorde.id] (click)="onUpdateSujet(accorde.id)" -->
+            </table>
+            <div id="pagination">
+                <pagination-controls (pageChange)="p=$event"></pagination-controls>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>

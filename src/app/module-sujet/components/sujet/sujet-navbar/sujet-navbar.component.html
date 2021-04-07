@@ -14,12 +14,12 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar navbar-nav">
         <li>
-            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-sm btn-outline-info ml-2">All</button>
+            <button routerLink="accorder_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-lg btn-success ml-2">Sujets accorde</button>
         </li>
-        <li>
-            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetPropose()" class="btn btn-sm btn-outline-info ml-2">Proposés</button>
-        </li>
-        <li>
+        <!-- <li>
+            <button [routerLink]="['/sujets/sujets_list']" routerLinkActive="activebutton" (click)="onGetSujetPropose()" class="btn btn-sm btn-outline-info ml-2">Proposés</button>
+        </li> -->
+        <!-- <li>
             <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetAccorde()" class="btn btn-sm btn-outline-info ml-2">Accordés</button>
         </li>
         <li>
@@ -33,11 +33,12 @@
         </li>
         <li>
             <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetDepose()" class="btn btn-sm btn-outline-info ml-2">Deposés</button>
-        </li>
+        </li> -->
 
-        <li>
+
+        <!-- <li>
             <button routerLink="sujet_add" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-sm btn-outline-info ml-2">Nouveau</button>
-        </li>
+        </li> -->
     </ul>
     <ul class="navbar navbar-nav ml-auto">
         <li>

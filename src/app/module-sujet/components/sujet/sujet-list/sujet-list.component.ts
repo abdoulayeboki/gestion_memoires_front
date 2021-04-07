@@ -11,6 +11,7 @@ import { User } from '../../../../core/models/user';
 import { Personnel } from '../../../../administration/models/personnel';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalPostulerComponent } from '../../postuler/modal-postuler/modal-postuler.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-sujet-list',
@@ -21,7 +22,16 @@ export class SujetListComponent implements OnInit {
   sujets$: Observable<AppDataState<any>> | undefined
   readonly DataStateEnum = DataStateEnum;
   personnel?:Personnel
-   p: number = 1;
+  p: number = 1;
+  etatSujets = [
+    { code: "PROPOSE", nom: "PROPOSE" },
+    { code: "ACCORDE", nom: "ACCORDE" },
+    { code: "VALIDE", nom: "VALIDE" },
+    { code: "TERMINE", nom: "TERMINE" },
+    { code: "SOUTENU", nom: "SOUTENU" },
+    { code: "DEPOSE", nom: "DEPOSE" },
+  ];
+  search = new FormControl('');
   constructor(
     private sujetService: SujetService,
     private sujetObservableService: SujetObservableService,
@@ -49,7 +59,7 @@ export class SujetListComponent implements OnInit {
     else return false
   }
   getSujets(etatSujet:string ="") {
-    this.sujets$ = this.sujetService.getSujets(etatSujet).pipe(
+    this.sujets$ = this.sujetService.getSujets(etatSujet,this.search.value).pipe(
       map((data) => {
         console.log(data)
         return ({ dataState: DataStateEnum.LOADED, data: data})

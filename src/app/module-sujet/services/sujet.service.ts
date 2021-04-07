@@ -15,8 +15,10 @@ export class SujetService {
   constructor(private http: HttpClient) {
   }
 
-  getSujets(etatSujet: string=""): Observable<Sujet[]> {
+  getSujets(etatSujet: string = "", search: string=""): Observable<Sujet[]> {
+    if (etatSujet != "")
     return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?etatSujet=${etatSujet}`)
+    return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?search=${search}`)
   }
   getSujet(id: number): Observable<Sujet> {
     return this.http.get<Sujet>(`${environment.apiUrl}/sujets/${id}/`)

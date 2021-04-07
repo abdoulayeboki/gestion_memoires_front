@@ -16,7 +16,12 @@ export class PostulerService {
   postPostulerSujets(postuler: Postuler): Observable<Postuler>{
     return this.http.post<Postuler>(`${environment.apiUrl}/sujet_postuler`, postuler);
   }
-
+  getAccordes(): Observable<any>{
+    return this.http.get<any>(`${environment.apiUrl}/sujet_accorder`);
+  }
+  updateAccorde(accorder:any): Observable<any>{
+    return this.http.put<any>(`${environment.apiUrl}/sujet_accorder/${accorder.id}/`,accorder);
+  }
   postAccorderSujets(idSujet:number|any,idPersonnel: number): Observable<any>{
     return this.http.post<any>(`${environment.apiUrl}/sujet_accorder`, {"sujet":idSujet,"personnel":idPersonnel});
   }
