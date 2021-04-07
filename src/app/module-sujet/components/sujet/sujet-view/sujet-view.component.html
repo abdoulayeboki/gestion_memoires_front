@@ -10,22 +10,24 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>ID Sujet</th>
                         <th>Prenom et Nom</th>
                         <th>Telephon</th>
                         <th>Email</th>
-                        <th>Motivation/CV</th>
-                        <th>Accorde</th>
+                        <th *ngIf="owner(sujet)">Motivation/CV</th>
+                        <th *ngIf="owner(sujet)">Accorde</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let personnel of personnelPostuler | paginate:{itemsPerPage: 4, currentPage: p }">
+                        <td>{{sujet.id}} </td>
                         <td>{{personnel.prenom}} {{personnel.nom}} </td>
                         <td>{{personnel.telephon}}</td>
                         <td>{{personnel.email}}</td>
-                        <td><button class="motivation btn btn-success" (click)="openMotivation(personnel)"><a><span class="fa fa-eye "></span></a></button>
+                        <td *ngIf="owner(sujet)"><button class="motivation btn btn-success" (click)="openMotivation(personnel)"><a><span class="fa fa-eye "></span></a></button>
                             <button class="btn btn-outline-primary" (click)="openCv(personnel)"><a><span class="fa fa-eye "></span></a></button>
                         </td>
-                        <td><button [ngClass]="personnel.accorde?'btn btn-outline-success':'btn btn-outline-danger'" class="btn btn-outline-primary" (click)="accorderSujet(personnel)">
+                        <td *ngIf="owner(sujet)"><button [ngClass]="personnel.accorde?'btn btn-outline-success':'btn btn-outline-danger'" class="btn btn-outline-primary" (click)="accorderSujet(personnel)">
                             <a><span *ngIf="personnel.accorde">Accorder</span>
                                 <span *ngIf="!personnel.accorde">Non Accorder</span></a></button></td>
                     </tr>

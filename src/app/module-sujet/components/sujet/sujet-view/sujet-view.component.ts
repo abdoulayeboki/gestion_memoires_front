@@ -98,7 +98,7 @@ export class SujetViewComponent implements OnInit {
   }
   // owner permet de verifier si la personne est proprietaire du sujet pour pouvoir modifie ou non
   owner(sujet: Sujet): Boolean{
-    if (this.personnel?.id==sujet.personnel?.id && sujet.etatSujet=="PROPOSE" )
+    if (this.personnel?.id==sujet.personnel?.id && ( sujet.etatSujet=="PROPOSE" || sujet.etatSujet=="ACCORDE") )
       return true
     else return false
   }

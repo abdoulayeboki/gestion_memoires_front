@@ -60,7 +60,7 @@
                                                 <span class="fa fa-eye "></span></a></button>
                                             </td>
                                             <td>{{sujet.personnel?.nom}} </td>
-                                            <td>{{sujet.createdDate}}</td>
+                                            <td>{{sujet.createdDate | date:"medium"}}</td>
                                             <td>{{sujet.etatSujet}}</td>
                                             <td><button *ngIf="owner(sujet)" [routerLink]="['sujet_edit', sujet.id]" class="btn btn-outline-success"><a>
                                                 <span class="fa fa-pencil"></span></a></button> </td>
