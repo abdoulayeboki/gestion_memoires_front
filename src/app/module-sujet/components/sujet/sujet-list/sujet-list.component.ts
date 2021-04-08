@@ -58,8 +58,8 @@ export class SujetListComponent implements OnInit {
       return true
     else return false
   }
-  getSujets(etatSujet:string ="") {
-    this.sujets$ = this.sujetService.getSujets(etatSujet,this.search.value).pipe(
+  getSujets(etatSujet:string ="",idPersonnel:number=0) {
+    this.sujets$ = this.sujetService.getSujets(etatSujet,this.search.value,idPersonnel).pipe(
       map((data) => {
         console.log(data)
         return ({ dataState: DataStateEnum.LOADED, data: data})

@@ -15,10 +15,17 @@ export class SujetService {
   constructor(private http: HttpClient) {
   }
 
-  getSujets(etatSujet: string = "", search: string=""): Observable<Sujet[]> {
-    if (etatSujet != "")
-    return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?etatSujet=${etatSujet}`)
-    return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?search=${search}`)
+  getSujets(etatSujet: string = "", search: string = "", personnel: number = 0): Observable<Sujet[]> {
+    if (personnel != 0) {
+      if (etatSujet != "") 
+        return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?personnel=${personnel}&etatSujet=${etatSujet}`)
+      else return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?personnel=${personnel}`)
+    } else {
+      if (etatSujet != "") 
+        return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?etatSujet=${etatSujet}`)
+      else return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets`)
+    }
+    
   }
   getSujet(id: number): Observable<Sujet> {
     return this.http.get<Sujet>(`${environment.apiUrl}/sujets/${id}/`)

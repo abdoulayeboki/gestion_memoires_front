@@ -14,15 +14,18 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar navbar-nav">
         <li>
-            <button routerLink="accorder_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-lg btn-success ml-2">Sujets accorde</button>
+            <button routerLink="accorder_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-lg btn-success ml-2">Sujets Accordes</button>
         </li>
-        <!-- <li>
-            <button [routerLink]="['/sujets/sujets_list']" routerLinkActive="activebutton" (click)="onGetSujetPropose()" class="btn btn-sm btn-outline-info ml-2">Proposés</button>
-        </li> -->
-        <!-- <li>
-            <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetAccorde()" class="btn btn-sm btn-outline-info ml-2">Accordés</button>
+
+        <li>
+            <button routerLinkActive="activebutton" class="btn btn-lg btn-success ml-2">
+                Mes Sujets </button>
         </li>
         <li>
+            <button routerLinkActive="activebutton" class="btn btn-lg btn-success ml-2">
+                Sujets Eseignants </button> </li>
+
+        <!-- <li>
             <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetValide()" class="btn btn-sm btn-outline-info ml-2">Valides</button>
         </li>
         <li>
