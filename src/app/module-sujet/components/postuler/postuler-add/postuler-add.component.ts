@@ -33,7 +33,6 @@ export class PostulerAddComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.postulerFormGroup?.invalid) return;
-    console.log(this.postulerFormGroup?.value)
     this.postulerService.postPostulerSujets(this.postulerFormGroup?.value)
       .subscribe((data)=>{
         alert("Success:vous avez postuler ");

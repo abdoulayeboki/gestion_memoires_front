@@ -8,6 +8,8 @@ import { SujetViewComponent } from './components/sujet/sujet-view/sujet-view.com
 import { AuthGuardService } from '../core/services/auth-guard.service';
 import { PostulerAddComponent } from './components/postuler/postuler-add/postuler-add.component';
 import { ListAccorderComponent } from './components/accorder/list-accorder/list-accorder.component';
+import { MesSujetsComponent } from './components/sujet/mes-sujets/mes-sujets.component';
+import { ValiderFormComponent } from './components/valider/valider-form/valider-form.component';
 
 const routes: Routes = [
   {
@@ -18,7 +20,9 @@ const routes: Routes = [
       { path: "sujet_edit/:id", component: SujetEditComponent, canActivate:[AuthGuardService] },
       { path: "sujet_view/:id", component: SujetViewComponent, canActivate: [AuthGuardService] },
       { path: "postuler_add/:id", component: PostulerAddComponent, canActivate: [AuthGuardService] },
-      { path: "accorder_list", component: ListAccorderComponent, canActivate:[AuthGuardService] },
+      { path: "accorder_list", component: ListAccorderComponent, canActivate: [AuthGuardService] },
+      { path: "mes_sujets", component: MesSujetsComponent, canActivate: [AuthGuardService] },
+      { path: "form_valider", component: ValiderFormComponent, canActivate:[AuthGuardService] },
       {path: "", component: SujetListComponent, canActivate:[AuthGuardService]}
     ]
   }

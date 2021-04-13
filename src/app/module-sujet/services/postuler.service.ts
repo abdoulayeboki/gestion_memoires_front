@@ -16,10 +16,13 @@ export class PostulerService {
   postPostulerSujets(postuler: Postuler): Observable<Postuler>{
     return this.http.post<Postuler>(`${environment.apiUrl}/sujet_postuler`, postuler);
   }
+  postValiderSujets(valider: any): Observable<any>{
+    return this.http.post<any>(`${environment.apiUrl}/sujet_valider`, valider);
+  }
   getAccordes(): Observable<any>{
     return this.http.get<any>(`${environment.apiUrl}/sujet_accorder`);
   }
-  updateAccorde(accorder:any): Observable<any>{
+  updateAccorde(accorder: any): Observable<any>{
     return this.http.put<any>(`${environment.apiUrl}/sujet_accorder/${accorder.id}/`,accorder);
   }
   postAccorderSujets(idSujet:number|any,idPersonnel: number): Observable<any>{
@@ -32,6 +35,9 @@ export class PostulerService {
     return this.http.get<Postuler[]>(`${environment.apiUrl}/sujet_accorder?sujet=${idSujet}&personnel=${idPersonnel}`);
   }
 
+  getValiderBySujetAndPersonnel(idSujet:number|any,idPersonnel: number):Observable<Postuler[]> {
+    return this.http.get<Postuler[]>(`${environment.apiUrl}/sujet_valider?sujet=${idSujet}&personnel=${idPersonnel}`);
+  }
   deleteAccorderSujets(sujetAccorder: any){
     return this.http.delete(`${environment.apiUrl}/sujet_accorder/${sujetAccorder.id}/`);
   }

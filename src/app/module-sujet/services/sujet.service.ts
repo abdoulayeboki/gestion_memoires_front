@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Sujet } from '../models/sujet';
 import { AuthServiceService } from '../../core/services/auth-service.service';
 import { User } from '../../core/models/user';
-import { concatMap, catchError } from 'rxjs/operators';
+import { concatMap, catchError, map } from 'rxjs/operators';
 import { Personnel } from '../../administration/models/personnel';
 
 @Injectable({
@@ -26,6 +26,13 @@ export class SujetService {
       else return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets`)
     }
     
+  }
+  getSujetAccorder(): Observable<Sujet[]> {
+    return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets`).pipe(
+      map(
+        (sujets: Sujet[]) => sujets.filter((sujet: Sujet) => sujet.etatSujet == "ACCORDE") 
+      )
+    )
   }
   getSujet(id: number): Observable<Sujet> {
     return this.http.get<Sujet>(`${environment.apiUrl}/sujets/${id}/`)

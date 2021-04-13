@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map, startWith, catchError, concatMap } from 'rxjs/operators';
+import { map, startWith, catchError } from 'rxjs/operators';
 import { DataStateEnum } from 'src/app/core/models/app-data-state';
-import { PostulerService } from '../../../services/postuler.service';
 import { Observable, of } from 'rxjs';
 import { SujetService } from '../../../services/sujet.service';
 import { Sujet } from '../../../models/sujet';
@@ -14,18 +13,22 @@ import { Sujet } from '../../../models/sujet';
 export class ListAccorderComponent implements OnInit {
   readonly DataStateEnum = DataStateEnum;
   accordes$: Observable<any> | undefined
-  p: number =1
+  sujets$: Observable<any> | undefined
+  personnelAccorder: any;
+  data$: Observable<any> | undefined
+  p: number = 1
+  list_p :any[] | undefined
   constructor(
-    private postulerService: PostulerService,
     private sujetService:SujetService,
   ) { }
 
   ngOnInit(): void {
-    this.getAccordes()
+    this.getSujets()
   }
-  getAccordes() {
-    this.accordes$ = this.postulerService.getAccordes().pipe(
+  getSujets() {
+    this.sujets$ = this.sujetService.getSujetAccorder().pipe(
       map((data) => {
+        console.log(data)
         return ({ dataState: DataStateEnum.LOADED, data: data})
       }),
       startWith({ dataState: DataStateEnum.LOADING }),
@@ -33,13 +36,5 @@ export class ListAccorderComponent implements OnInit {
     )
   }
 
-  editAccorder(accorder: any) {
-    if (confirm("Etes vous sûr d'effectuer cette operation")) {
-      if (accorder.valide) accorder.valide = false;
-      else accorder.valide = true;
-      this.postulerService.updateAccorde(accorder).subscribe(
-        (data) => { alert("Success, changement validé") }
-      )
-    }
-  }
+  
 }

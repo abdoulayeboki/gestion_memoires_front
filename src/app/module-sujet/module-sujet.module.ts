@@ -15,10 +15,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ModalPostulerComponent } from './components/postuler/modal-postuler/modal-postuler.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListAccorderComponent } from './components/accorder/list-accorder/list-accorder.component';
+import { MesSujetsComponent } from './components/sujet/mes-sujets/mes-sujets.component';
+import { ValiderFormComponent } from './components/valider/valider-form/valider-form.component';
 
 
 @NgModule({
-  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent, ModalPostulerComponent, ListAccorderComponent],
+  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent, ModalPostulerComponent, ListAccorderComponent, MesSujetsComponent, ValiderFormComponent],
   imports: [
     CommonModule,
     ModuleSujetRoutingModule,

@@ -21,6 +21,7 @@ export class SujetViewComponent implements OnInit {
   sujet?: Sujet;
   personnel?: Personnel;
   personnelPostuler: any;
+  personnelAccorder: any;
   p:number=1;
   accorde: boolean = false
   constructor(
@@ -46,7 +47,8 @@ export class SujetViewComponent implements OnInit {
     this.sujetService.getSujet(this.idSujet)
       .subscribe(sujet => {
         this.sujet = sujet
-        this.personnelPostuler =[]
+        this.personnelPostuler = []
+        this.personnelAccorder =[]
         // verification si la personne à été accorde pour ajoute un attribut accorde sur l'objet personnel
         for (let p of sujet.personnelPostuler){
           this.postulerService.getAccorderBySujetAndPersonnel(this.sujet?.id, p.id).subscribe(

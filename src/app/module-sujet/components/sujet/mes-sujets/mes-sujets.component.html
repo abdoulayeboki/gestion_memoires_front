@@ -1,0 +1,62 @@
+<div class="wrapper wrapper-content animated fadeInUpBig">
+    <div class="row">
+        <div class="offset-sm-11">
+            <button [routerLink]="[ '/sujets']" class="btn-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
+        </div>
+        <div class="col-lg-12"><br>
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Table Sujet</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <ng-container *ngIf="(sujets$ | async) as result" [ngSwitch]="result.dataState">
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                            Loading .....
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                            <div class="alert alert-danger"> {{result.errorMessage}} </div>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                            <div class="table-responsive">
+                                <table class="table table-striped ">
+                                    <caption>Liste des sujets</caption>
+                                    <thead class="table-success">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>titre</th>
+                                            <th>Description</th>
+                                            <th>Proprietaire</th>
+                                            <th>Date creation</th>
+                                            <th>Etat du sujet</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let sujet of result.data | paginate:{itemsPerPage: 4, currentPage: p }">
+                                            <td>{{sujet.id}} </td>
+                                            <td>{{sujet.titre}} </td>
+                                            <td><button class=" btn btn-success" (click)="openDescription(sujet.description)"><a>
+                                                <span class="fa fa-eye "></span></a></button>
+                                            </td>
+                                            <td>{{sujet.personnel?.nom}} </td>
+                                            <td>{{sujet.createdDate | date:"medium"}}</td>
+                                            <td>{{sujet.etatSujet}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id="pagination">
+                                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
