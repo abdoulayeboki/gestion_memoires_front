@@ -2,11 +2,11 @@
     <div class="form-group row">
         <div class="col-sm-7">
             <div *ngFor="let personnelAccorder of personnelAccorders">
-                <input type="checkbox" [value]="personnelAccorder.id" (change)="onChange($event)" /> {{personnelAccorder.email}}
+                <input type="checkbox" [value]="personnelAccorder.id" (change)="onChange($event)" /> {{personnelAccorder.prenom}} {{personnelAccorder.nom}}
             </div>
         </div>
         <div class="col-sm-2 ">
-            <button type="submit" [disabled]="!form.valid" class="btn btn-sm btn-primary">Valider</button>
+            <button type="submit" [disabled]="!form.valid" class="btn btn-lg btn-success">Valider</button>
         </div>
     </div>
 </form>

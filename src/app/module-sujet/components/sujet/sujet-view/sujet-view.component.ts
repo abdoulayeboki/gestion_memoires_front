@@ -56,35 +56,16 @@ export class SujetViewComponent implements OnInit {
               if (postuler.length > 0)
                 p.accorde = true;
               else p.accorde = false
+              if (!(p.nbr_sujet_valide > 0 && p.profil == "ETUDIANT"))
               this.personnelPostuler.push(p)
             }
           );
         }
+        this.personnelPostuler.filter((p:any) => p.nbr_sujet_valide>0)
       });
   }
 
-  // get personnes(): any {
-  //   return this.personSubject?.value;
-  // }
-  // getData() {
-  //   this.sujetService.getSujet(this.idSujet)
-  //     .subscribe(sujet => {
-  //       this.sujet = sujet
-  //       this.personnelPostuler =[]
-  //       // verification si la personne à été accorde pour ajoute un attribut accorde sur l'objet personnel
-  //       for (let p of sujet.personnelPostuler){
-  //         this.postulerService.getAccorderBySujetAndPersonnel(this.sujet?.id, p.id).subscribe(
-  //           (postuler: Postuler[]) => {
-  //             if (postuler.length > 0)
-  //               p.accorde = true;
-  //             else p.accorde = false
-  //             this.personnelPostuler.push(p)
-  //           }
-  //         );
-  //       }
-         
-  //     });
-  // }
+
 
   deleteSujet() {
     if(confirm("etes vs sur de vouloir supprimer ce sujet"))
@@ -107,7 +88,10 @@ export class SujetViewComponent implements OnInit {
 
 
   // pour voir si la personne peut postuler
-  peutPostuler(sujet:Sujet):Boolean {
+  peutPostuler(sujet: Sujet): Boolean {
+    if (this.personnel?.profil == "ETUDIANT" && this.personnel.nbr_sujet_valide>0)
+      return false
+    
     if (sujet.personnel.profil == this.personnel?.profil)
       return false
     else if (sujet.personnel.profil==="AUTRE"  && this.personnel?.profil==="ENSEIGNANT")

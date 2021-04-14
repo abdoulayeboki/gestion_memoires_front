@@ -31,9 +31,10 @@ export class ValiderFormComponent implements OnInit {
   }
   getAccord() {
     this.sujetService.getSujet(this.idSujet).subscribe(
-        (app) => {
-          for (let p of app.personnelAccorder) {
-            this.personnelAccorders.push(p)
+        (sujet) => {
+        for (let p of sujet.personnelAccorder) {
+          if (!(p.profil === "ETUDIANT" && p.nbr_sujet_valide > 0))
+            this.personnelAccorders.push(p);  
           }
         }
     )

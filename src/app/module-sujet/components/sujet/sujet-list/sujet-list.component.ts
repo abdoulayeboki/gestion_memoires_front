@@ -31,6 +31,11 @@ export class SujetListComponent implements OnInit {
     { code: "SOUTENU", nom: "SOUTENU" },
     { code: "DEPOSE", nom: "DEPOSE" },
   ];
+  profils = [
+    { code: "ETUDIANT", nom:"ETUDIANT" },
+    { code: "ENSEIGNANT", nom: "ENSEIGNANT" },
+    { code: "AUTRE", nom:"AUTRE" },
+  ]
   search = new FormControl('');
   constructor(
     private sujetService: SujetService,
@@ -68,7 +73,15 @@ export class SujetListComponent implements OnInit {
       catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
     )
   }
-
+  getSujetByProfil(profil: string) {
+    this.sujets$ = this.sujetService.getSujetByProfil(profil).pipe(
+      map((data) => {
+        return ({ dataState: DataStateEnum.LOADED, data: data})
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
+    )
+  }
   onActionEvent($event: EvenementSujet) {
     switch ($event.type) {
       case TypeEvenementSujet.PROPOSE: this.getSujets("PROPOSE"); break;

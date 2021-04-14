@@ -27,6 +27,13 @@ export class SujetService {
     }
     
   }
+
+  getSujetByProfil(profil: string): Observable<Sujet[]> {
+    return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets`).pipe(
+      map((sujets:Sujet[]) =>sujets.filter((sujet:Sujet) => sujet.personnel.profil==profil) )
+    )
+  }
+
   getSujetAccorder(): Observable<Sujet[]> {
     return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets`).pipe(
       map(

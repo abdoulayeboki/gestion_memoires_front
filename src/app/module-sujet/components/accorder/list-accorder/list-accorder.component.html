@@ -17,24 +17,19 @@
                         <th>ID</th>
                         <!-- <th>Sujet</th> -->
                         <th>titre</th>
-                        <th>Valide</th>
+                        <th>Personnel</th>
+                        <!-- <th>Valide</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let sujet of result.data | paginate:{itemsPerPage: 3, currentPage: p }">
                         <td>{{sujet.id}} </td>
-                        <!-- <td>{{sujet.sujet}} </td> -->
                         <td>{{sujet.titre}} </td>
-                        <!-- <td><button (click)="editAccorder(sujet)" [ngClass]="sujet.valide?'btn btn-primary':'btn btn-danger'"> <a><span *ngIf="sujet.valide" class="fa 
-                            fa-toggle-on"></span>
-                            <span *ngIf="!sujet.valide" class="fa  fa-toggle-off"></span></a></button>
-                        </td> -->
                         <td *ngIf="sujet">
                             <app-valider-form [idSujet]="sujet.id"></app-valider-form>
                         </td>
                     </tr>
                 </tbody>
-                <!-- [routerLink]="[ 'sujet_edit', sujet.id] (click)="onUpdateSujet(sujet.id)" -->
             </table>
             <div id="pagination">
                 <pagination-controls (pageChange)="p=$event"></pagination-controls>

@@ -13,8 +13,8 @@
 </div>
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar navbar-nav">
-        <li>
-            <button routerLink="accorder_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-lg btn-success ml-2">Sujets Accordes</button>
+        <li *ngIf="admin">
+            <button routerLink="accorder_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-lg btn-success ml-2">Validation</button>
         </li>
 
         <li>

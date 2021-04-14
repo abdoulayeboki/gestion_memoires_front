@@ -4,4 +4,5 @@ export interface Personnel {
   nom: string;
   profil: string;
   accorde: boolean;
+  nbr_sujet_valide: number;
 }

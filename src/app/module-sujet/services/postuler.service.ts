@@ -38,6 +38,9 @@ export class PostulerService {
   getValiderBySujetAndPersonnel(idSujet:number|any,idPersonnel: number):Observable<Postuler[]> {
     return this.http.get<Postuler[]>(`${environment.apiUrl}/sujet_valider?sujet=${idSujet}&personnel=${idPersonnel}`);
   }
+  getValiderByPersonnel(idPersonnel: number):Observable<Postuler[]> {
+    return this.http.get<Postuler[]>(`${environment.apiUrl}/sujet_valider?personnel=${idPersonnel}`);
+  }
   deleteAccorderSujets(sujetAccorder: any){
     return this.http.delete(`${environment.apiUrl}/sujet_accorder/${sujetAccorder.id}/`);
   }

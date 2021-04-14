@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TypeEvenementSujet, EvenementSujet } from '../../../../core/models/app-data-state';
 import { SujetObservableService } from '../../../services/sujet-observable.service';
+import { AuthServiceService } from '../../../../core/services/auth-service.service';
+import { concatMap } from 'rxjs/operators';
+import { Personnel } from 'src/app/administration/models/personnel';
 
 @Component({
   selector: 'app-sujet-navbar',
@@ -8,10 +11,21 @@ import { SujetObservableService } from '../../../services/sujet-observable.servi
   styleUrls: ['./sujet-navbar.component.scss']
 })
 export class SujetNavbarComponent implements OnInit {
-// @Output() sujetEventEmitter: EventEmitter<EvenementSujet> = new EventEmitter();
+  personnel: Personnel | undefined
+  admin:boolean =false
   constructor(
     private sujetObservableService: SujetObservableService,
-  ) { }
+    private authService : AuthServiceService
+  ) {
+     // recuperons le personnel actuellement connecte
+     this.authService.userObservable.pipe(
+      concatMap(user => this.authService.getUserById(user.id) )
+     ).subscribe(user => {
+       this.personnel = user.personnel
+       if (this.personnel?.profil == "AUTRE")
+         this.admin = true
+     })
+  }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content animated fadeInUpBig">
+<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
@@ -18,7 +18,12 @@
                             <option *ngFor="let etatSujet of etatSujets" value="{{etatSujet.code}}" >{{etatSujet.nom}} </option>
                         </select>
                         </div>
-
+                        <div class="col-sm-3 m-b-xs">
+                            <select #prof (change)="getSujetByProfil(prof.value)" class="form-control-sm form-control input-s-sm inline">
+                            <option value="">Afficher par profil </option>
+                            <option *ngFor="let profil of profils" value="{{profil.code}}" >{{profil.nom}} </option>
+                        </select>
+                        </div>
                         <div class="col-sm-3">
                             <div class="input-group"><input placeholder="Search By Prenom, Nom , INE" [formControl]="search" type="text" class="form-control form-control-sm">
                                 <span class="input-group-append"> 

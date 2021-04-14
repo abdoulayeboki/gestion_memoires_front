@@ -1,6 +1,7 @@
 <div *ngIf="sujet" class="col-lg-12">
     <div class="ibox-tools">
-        <button *ngIf="peutPostuler(sujet)" [routerLink]="['/sujets/postuler_add', sujet.id]" class="btn btn-outline-primary quitter ">Postuler </button>
+        <button *ngIf="peutPostuler(sujet)" [routerLink]="['/sujets/postuler_add', sujet.id]" class="btn btn-outline-primary quitter ">
+            Postuler </button>
         <button (click)="onCancel()" class="btn-outline-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
         <button *ngIf="owner(sujet)" (click)="deleteSujet()" class="btn btn-outline-danger fa fa-trash"> </button>
     </div><br><br><br>
