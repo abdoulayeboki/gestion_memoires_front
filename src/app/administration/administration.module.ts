@@ -14,6 +14,7 @@ import { FiliereService } from './services/filiere.service';
 import { SpecialiteService } from './services/specialite.service';
 import { ClasseService } from './services/classe.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AdministrationRoutingModule,
     ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [
     EtudiantService,

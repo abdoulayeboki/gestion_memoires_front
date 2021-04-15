@@ -24,6 +24,7 @@ export class SujetViewComponent implements OnInit {
   personnelAccorder: any;
   p:number=1;
   accorde: boolean = false
+  sujetValide: boolean = false;
   constructor(
     private sujetService: SujetService,
     private activatedRoute: ActivatedRoute,
@@ -47,6 +48,8 @@ export class SujetViewComponent implements OnInit {
     this.sujetService.getSujet(this.idSujet)
       .subscribe(sujet => {
         this.sujet = sujet
+        if (sujet.etatSujet == "VALIDE")
+          this.sujetValide = true;
         this.personnelPostuler = []
         this.personnelAccorder =[]
         // verification si la personne à été accorde pour ajoute un attribut accorde sur l'objet personnel
@@ -56,7 +59,8 @@ export class SujetViewComponent implements OnInit {
               if (postuler.length > 0)
                 p.accorde = true;
               else p.accorde = false
-              if (!(p.nbr_sujet_valide > 0 && p.profil == "ETUDIANT"))
+
+              // if (!(p.nbr_sujet_valide > 0 && p.profil == "ETUDIANT"))
               this.personnelPostuler.push(p)
             }
           );
@@ -131,6 +135,7 @@ export class SujetViewComponent implements OnInit {
       () => {
         // this.ngOnInit()
         alert("Success: le sujet à bien été accordé")
+        window.location.reload();
       },
       error =>alert("Erreur: ce sujet a été dèjà accordé")
     )
@@ -143,6 +148,7 @@ export class SujetViewComponent implements OnInit {
               () => {
                 // this.ngOnInit();
                 alert("Success: accord annulé")
+                window.location.reload();
               }
             )
         }

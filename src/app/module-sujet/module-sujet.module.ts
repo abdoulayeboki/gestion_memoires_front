@@ -20,7 +20,7 @@ import { ValiderFormComponent } from './components/valider/valider-form/valider-
 
 
 @NgModule({
-  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent, SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent, ModalPostulerComponent, ListAccorderComponent, MesSujetsComponent, ValiderFormComponent],
+  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent,SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent,ModalPostulerComponent, ListAccorderComponent, MesSujetsComponent, ValiderFormComponent],
   imports: [
     CommonModule,
     ModuleSujetRoutingModule,

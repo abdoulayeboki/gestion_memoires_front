@@ -46,7 +46,7 @@ export class ValiderFormComponent implements OnInit {
       this.postulerService.postValiderSujets({ "sujet": this.idSujet, "personnel": +idPerson }).subscribe(
         (data) => {
           alert('success')
-          // this.router.navigate(['/sujets/accorder_list'])
+          window.location.reload();
         },
         (error) => alert(error.status)
       )

@@ -11,7 +11,7 @@
         </ol>
     </div>
 </div>
-<div class="wrapper wrapper-content animated flipInX">
+<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
@@ -50,12 +50,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let departement of result.data">
+                                        <tr *ngFor="let departement of result.data | paginate:{itemsPerPage: 4, currentPage: p }">
                                             <td>{{departement.code}} </td>
                                             <td>{{departement.nom}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div id="pagination">
+                                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                                </div>
                             </div>
                         </ng-container>
                     </ng-container>

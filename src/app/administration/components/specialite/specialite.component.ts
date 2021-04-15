@@ -15,8 +15,9 @@ import { catchError, map, startWith } from 'rxjs/operators';
 })
 export class SpecialiteComponent implements OnInit {
 
-  specialites: Observable<AppDataState<Specialite[]>> | undefined
+  specialites: Observable<AppDataState<any>> | undefined
   filieres: any
+  p: number = 1;
   readonly DataStateEnum=DataStateEnum
   search= new FormControl('')
   constructor(

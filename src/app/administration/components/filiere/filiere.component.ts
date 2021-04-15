@@ -15,8 +15,9 @@ import { Filiere } from '../../models/filiere';
 })
 export class FiliereComponent implements OnInit {
 
-  filieres: Observable<AppDataState<Filiere[]>> | undefined
+  filieres: Observable<AppDataState<any>> | undefined
   departements: any;
+  p: number = 1;
   search = new FormControl('')
   readonly DataStateEnum = DataStateEnum;
   constructor(

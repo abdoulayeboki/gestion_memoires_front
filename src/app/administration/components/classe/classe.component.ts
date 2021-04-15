@@ -15,9 +15,10 @@ import { catchError, map, startWith } from 'rxjs/operators';
 })
 export class ClasseComponent implements OnInit {
 
-  classes: Observable<AppDataState<Classe[]>> | undefined
+  classes: Observable<AppDataState<any>> | undefined
   search = new FormControl('')
-  filieres : any
+  filieres: any;
+  p: number = 1;
   constructor(
     private classeService: ClasseService,
     private filiereService: FiliereService

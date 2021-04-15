@@ -13,9 +13,10 @@ import { AppDataState } from '../../../core/models/app-data-state';
   styleUrls: ['./departement.component.scss']
 })
 export class DepartementComponent implements OnInit {
-  departements: Observable<AppDataState<Departement[]>>| null | undefined
+  departements: Observable<AppDataState<any>>| null | undefined
   search = new FormControl('');
   readonly DataStateEnum = DataStateEnum;
+  p: number = 1;
   constructor(private departementService: DepartementService) { }
 
   ngOnInit(): void {

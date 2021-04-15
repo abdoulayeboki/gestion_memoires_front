@@ -17,7 +17,7 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./etudiant.component.scss']
 })
 export class EtudiantComponent implements OnInit, OnChanges {
-  etudiants: Observable<AppDataState<Etudiant[]>> | undefined;
+  etudiants: Observable<AppDataState<any>> | undefined;
   codeClasse: string='';
   niveau: string = '';
   codePromotion: string=""
@@ -27,6 +27,7 @@ export class EtudiantComponent implements OnInit, OnChanges {
   idPromotion: number = 0;
   idClasse: number = 0;
   idFiliere: number = 0;
+  page: number = 1;
   readonly DataStateEnum= DataStateEnum
   niveaux = [
     { code: "BTS", nom: "BTS" },
@@ -36,7 +37,7 @@ export class EtudiantComponent implements OnInit, OnChanges {
     { code: "T2", nom: "These 2" },
     { code: "T3", nom: "These 3" },
   ]
-  valeur:string=""
+  valeur: string = "";
   constructor(
     private etudiantService: EtudiantService,
     private classeService: ClasseService,

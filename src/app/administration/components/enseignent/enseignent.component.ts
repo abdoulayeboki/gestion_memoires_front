@@ -14,9 +14,10 @@ import { catchError, map, mapTo, startWith } from 'rxjs/operators';
   styleUrls: ['./enseignent.component.scss']
 })
 export class EnseignentComponent implements OnInit {
-  enseignents: Observable<AppDataState<Enseignent[]>> |  undefined
+  enseignents: Observable<AppDataState<any>> |  undefined
   search = new FormControl('');
   departements: any
+  p: number = 1;
   readonly DataStateEnum = DataStateEnum;
   constructor(
     private enseignentService: EnseignentService,

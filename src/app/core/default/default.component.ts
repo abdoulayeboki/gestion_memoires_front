@@ -15,15 +15,17 @@ export class DefaultComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEtudiants()
+    
   }
   getEtudiants() {
     this.etudiantService.getEtudiants().subscribe(
       (data) => {
         console.log(data)
-        this.etudiants =data
+        this.etudiants = data
+        
       },
       (error) => console.log(error)
    )
   }
-
+  
 }
