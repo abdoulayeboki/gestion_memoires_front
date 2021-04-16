@@ -2,12 +2,8 @@
     <form [formGroup]="postulerFormGroup" (ngSubmit)="onSubmit()">
         <div class="form-group  row"><label class="col-sm-2 col-form-label">CV</label>
             <div class="col-sm-10">
-                <input formControlName="cv" required [ngClass]="{'is-invalid':submitted && postulerFormGroup.controls.cv.errors}" type="text" class="form-control">
-                <div *ngIf="submitted && postulerFormGroup.controls.cv.errors" class="invalid-feedback alert alert-danger ">
-                    <div class="col-sm-10" *ngIf="postulerFormGroup.controls.cv.errors.required">cv is Required</div>
-                </div>
+                <input type="file" name="file_cv" class="form-control-file" (change)="onChange($event)">
             </div>
-
         </div>
 
 

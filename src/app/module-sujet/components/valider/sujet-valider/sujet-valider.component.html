@@ -15,7 +15,7 @@
                             <div class="offset-sm-8 col-sm-4 search">
                                 <div class="input-group"><input placeholder="Search By titre" [formControl]="search" type="text" class="form-control form-control-sm">
                                     <span class="input-group-append"> 
-                                <button (click)="getSujets()" class="btn btn-sm btn-primary">Go!
+                                <button (click)="getSujetValider()" class="btn btn-sm btn-primary">Go!
                                 </button> </span>
                                     <button [routerLink]="[ '/sujets']" class="btn-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
                                 </div>
@@ -31,6 +31,7 @@
                                             <th>Proprietaire</th>
                                             <th>Date creation</th>
                                             <th>Etat du sujet</th>
+                                            <th>Personnel Accorde</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,6 +44,11 @@
                                             <td>{{sujet.personnel?.nom}} </td>
                                             <td>{{sujet.createdDate | date:"medium"}}</td>
                                             <td>{{sujet.etatSujet}}</td>
+                                            <td>
+                                                <ul *ngFor="let p of sujet.personnelValider">
+                                                    <li>{{p.prenom}} {{p.nom}}</li>
+                                                </ul>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

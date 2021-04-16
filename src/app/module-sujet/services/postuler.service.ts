@@ -13,7 +13,7 @@ export class PostulerService {
     private http: HttpClient,
   ) { }
 
-  postPostulerSujets(postuler: Postuler): Observable<Postuler>{
+  postPostulerSujets(postuler: any): Observable<Postuler>{
     return this.http.post<Postuler>(`${environment.apiUrl}/sujet_postuler`, postuler);
   }
   postValiderSujets(valider: any): Observable<any>{

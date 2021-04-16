@@ -23,7 +23,7 @@ export class SujetService {
     } else {
       if (etatSujet != "") 
         return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?etatSujet=${etatSujet}`)
-      else return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets`)
+      else return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?search=${search}`)
     }
     
   }
@@ -38,6 +38,13 @@ export class SujetService {
     return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets`).pipe(
       map(
         (sujets: Sujet[]) => sujets.filter((sujet: Sujet) => sujet.etatSujet == "ACCORDE") 
+      )
+    )
+  }
+  getSujetValider(search: string = ""): Observable<Sujet[]> {
+    return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?search=${search}`).pipe(
+      map(
+        (sujets: Sujet[]) => sujets.filter((sujet: Sujet) => sujet.etatSujet == "VALIDER") 
       )
     )
   }

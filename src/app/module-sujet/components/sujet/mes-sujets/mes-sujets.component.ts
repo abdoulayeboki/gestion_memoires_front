@@ -28,6 +28,10 @@ export class MesSujetsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getSujets()
+    
+  }
+  getSujets() {
     this.sujets$ = this.authService.userObservable.pipe(
       concatMap(user => this.authService.getUserById(user.id) )).pipe(
       concatMap( user => this.sujetService.getSujets('','',user.personnel?.id).pipe(
@@ -38,9 +42,7 @@ export class MesSujetsComponent implements OnInit {
         catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
       ))
     )
-    
   }
-  
 
   openDescription(description:string) {
         const modalRef = this.modalService.open(ModalPostulerComponent);

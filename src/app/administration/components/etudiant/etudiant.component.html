@@ -75,7 +75,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let etudiant of result.data | paginate:{itemsPerPage: 4, currentPage: page }">
+                                        <tr *ngFor="let etudiant of result.data | paginate:{itemsPerPage: 6, currentPage: page }">
                                             <td>{{etudiant.ine}} </td>
                                             <td>{{etudiant.prenom}}</td>
                                             <td>{{etudiant.nom}}</td>

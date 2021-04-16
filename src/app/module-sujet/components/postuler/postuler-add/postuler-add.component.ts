@@ -26,14 +26,26 @@ export class PostulerAddComponent implements OnInit {
     console.log(this.idSujet)
     this.postulerFormGroup =this.fb.group ({
       motivation: ["", Validators.required],
-      cv: ["", Validators.required],
+      file_cv:[null],
       sujet:[this.idSujet,Validators.required]
     })
   }
+
+  onChange(event:any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.postulerFormGroup?.get('file_cv')?.setValue(file);
+    }
+  }
+
   onSubmit() {
     this.submitted = true;
     if (this.postulerFormGroup?.invalid) return;
-    this.postulerService.postPostulerSujets(this.postulerFormGroup?.value)
+    const formData = new FormData();
+    formData.append('file_cv', this.postulerFormGroup?.get('file_cv')?.value);
+    formData.append('motivation', this.postulerFormGroup?.get('motivation')?.value);
+    formData.append('sujet', this.postulerFormGroup?.get('sujet')?.value);
+    this.postulerService.postPostulerSujets(formData)
       .subscribe((data)=>{
         alert("Success:vous avez postuler ");
         this.router.navigate(['sujets'])
@@ -41,6 +53,17 @@ export class PostulerAddComponent implements OnInit {
       error =>alert("Erreur: Vous avez dèjà postulé à ce sujet")
     );
   }
+  // onSubmit() {
+  //   this.submitted = true;
+  //   if (this.postulerFormGroup?.invalid) return;
+  //   this.postulerService.postPostulerSujets(this.postulerFormGroup?.value)
+  //     .subscribe((data)=>{
+  //       alert("Success:vous avez postuler ");
+  //       this.router.navigate(['sujets'])
+  //     },
+  //     error =>alert("Erreur: Vous avez dèjà postulé à ce sujet")
+  //   );
+  // }
   onCancel() {
     this.router.navigate(['sujets'])
   }

@@ -17,10 +17,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListAccorderComponent } from './components/accorder/list-accorder/list-accorder.component';
 import { MesSujetsComponent } from './components/sujet/mes-sujets/mes-sujets.component';
 import { ValiderFormComponent } from './components/valider/valider-form/valider-form.component';
+import { SujetValiderComponent } from './components/valider/sujet-valider/sujet-valider.component';
 
 
 @NgModule({
-  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent,SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent,ModalPostulerComponent, ListAccorderComponent, MesSujetsComponent, ValiderFormComponent],
+  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent,SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent,ModalPostulerComponent, ListAccorderComponent, MesSujetsComponent, ValiderFormComponent, SujetValiderComponent],
   imports: [
     CommonModule,
     ModuleSujetRoutingModule,

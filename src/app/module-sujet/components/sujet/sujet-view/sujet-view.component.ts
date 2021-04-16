@@ -123,7 +123,7 @@ export class SujetViewComponent implements OnInit {
         console.log(postuler)
         const modalRef = this.modalService.open(ModalPostulerComponent);
         modalRef.componentInstance.titre = "CV";
-        modalRef.componentInstance.motivation = postuler[0].cv;
+        modalRef.componentInstance.motivation = postuler[0].file_cv;
      }
     )   
   }

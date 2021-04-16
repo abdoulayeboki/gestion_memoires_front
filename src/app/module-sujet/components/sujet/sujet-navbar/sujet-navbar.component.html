@@ -14,16 +14,16 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <ul class="navbar navbar-nav">
         <li *ngIf="admin">
-            <button routerLink="accorder_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-sm btn-success ml-2">Validation</button>
+            <button routerLink="accorder_list" routerLinkActive="activebutton" (click)="onGetAll()" class="btn btn-md btn-success ml-2">Validation</button>
         </li>
 
         <li>
-            <button routerLink="mes_sujets" routerLinkActive="activebutton" class="btn btn-sm btn-success ml-2">
+            <button routerLink="mes_sujets" routerLinkActive="activebutton" class="btn btn-md btn-success ml-2">
                 Mes Sujets </button>
         </li>
         <li>
-            <button routerLinkActive="activebutton" class="btn btn-sm btn-success ml-2">
-                Sujets Eseignants </button> </li>
+            <button routerLink="sujet_valider" routerLinkActive="activebutton" class="btn btn-md btn-success ml-2">
+                Sujets validés</button> </li>
 
         <!-- <li>
             <button routerLink="sujets_list" routerLinkActive="activebutton" (click)="onGetSujetValide()" class="btn btn-sm btn-outline-info ml-2">Valides</button>

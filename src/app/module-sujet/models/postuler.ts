@@ -1,5 +1,5 @@
 export interface Postuler{
   motivation: string;
-  cv: string;
-  sujet:number;
+  file_cv: any;
+  sujet: number;
 }
