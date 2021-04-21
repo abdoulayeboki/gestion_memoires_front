@@ -17,6 +17,7 @@ export class PostulerService {
     return this.http.post<Postuler>(`${environment.apiUrl}/sujet_postuler`, postuler);
   }
   postValiderSujets(valider: any): Observable<any>{
+    console.log(valider)
     return this.http.post<any>(`${environment.apiUrl}/sujet_valider`, valider);
   }
   getAccordes(): Observable<any>{

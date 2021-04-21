@@ -22,7 +22,7 @@ export class SujetNavbarComponent implements OnInit {
       concatMap(user => this.authService.getUserById(user.id) )
      ).subscribe(user => {
        this.personnel = user.personnel
-       if (this.personnel?.profil == "AUTRE")
+       if (this.personnel?.profil == "AUTRE" || this.personnel?.profil == "ENSEIGNANT")
          this.admin = true
      })
   }

@@ -44,7 +44,7 @@ export class SujetService {
   getSujetValider(search: string = ""): Observable<Sujet[]> {
     return this.http.get<Sujet[]>(`${environment.apiUrl}/sujets?search=${search}`).pipe(
       map(
-        (sujets: Sujet[]) => sujets.filter((sujet: Sujet) => sujet.etatSujet == "VALIDER") 
+        (sujets: Sujet[]) => sujets.filter((sujet: Sujet) => sujet.etatSujet == "VALIDE") 
       )
     )
   }

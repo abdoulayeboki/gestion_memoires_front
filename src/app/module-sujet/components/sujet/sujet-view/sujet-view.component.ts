@@ -25,6 +25,7 @@ export class SujetViewComponent implements OnInit {
   p:number=1;
   accorde: boolean = false
   sujetValide: boolean = false;
+  imgUrl: string=""
   constructor(
     private sujetService: SujetService,
     private activatedRoute: ActivatedRoute,
@@ -59,11 +60,18 @@ export class SujetViewComponent implements OnInit {
               if (postuler.length > 0)
                 p.accorde = true;
               else p.accorde = false
-
               // if (!(p.nbr_sujet_valide > 0 && p.profil == "ETUDIANT"))
-              this.personnelPostuler.push(p)
+              // this.personnelPostuler.push(p)
             }
           );
+          this.postulerService.getPostulerBySujetAndPersonnel(this.sujet?.id, p.id).subscribe(
+            (postuler: Postuler[]) => {
+              p.imgUrl = postuler[0].file_cv
+              p.motivation = postuler[0].motivation
+           }
+          )
+          this.personnelPostuler.push(p)
+          console.log(this.personnelPostuler)
         }
         this.personnelPostuler.filter((p:any) => p.nbr_sujet_valide>0)
       });
@@ -106,27 +114,13 @@ export class SujetViewComponent implements OnInit {
       return true
   }
   // ouvrir le modal pour voir la motivation de la personne
-  openMotivation(personnel:Personnel) {
-    this.postulerService.getPostulerBySujetAndPersonnel(this.sujet?.id, personnel.id).subscribe(
-      (postuler: Postuler[]) => {
-        console.log(postuler)
+  openMotivation(personnel:any) {
         const modalRef = this.modalService.open(ModalPostulerComponent);
         modalRef.componentInstance.titre = "Motivation";
-        modalRef.componentInstance.motivation = postuler[0].motivation;
-     }
-    )   
+        modalRef.componentInstance.motivation = personnel.motivation; 
   }
 
-  openCv(personnel:Personnel) {
-    this.postulerService.getPostulerBySujetAndPersonnel(this.sujet?.id, personnel.id).subscribe(
-      (postuler: Postuler[]) => {
-        console.log(postuler)
-        const modalRef = this.modalService.open(ModalPostulerComponent);
-        modalRef.componentInstance.titre = "CV";
-        modalRef.componentInstance.motivation = postuler[0].file_cv;
-     }
-    )   
-  }
+ 
 
   accorderSujet(personnel: Personnel) {
     if (!personnel.accorde) {

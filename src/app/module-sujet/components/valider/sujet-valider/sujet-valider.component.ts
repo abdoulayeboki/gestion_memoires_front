@@ -33,6 +33,7 @@ export class SujetValiderComponent implements OnInit {
   getSujetValider() {
     this.sujets$ = this.sujetService.getSujetValider(this.search.value).pipe(
       map((data) => {
+        console.log(data)
         return ({ dataState: DataStateEnum.LOADED, data: data })
       }),
       startWith({ dataState: DataStateEnum.LOADING }),

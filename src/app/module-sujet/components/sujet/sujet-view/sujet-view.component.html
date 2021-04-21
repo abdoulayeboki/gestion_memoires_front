@@ -2,7 +2,8 @@
     <div class="ibox-tools">
         <button *ngIf="peutPostuler(sujet)" [routerLink]="['/sujets/postuler_add', sujet.id]" class="btn btn-outline-primary quitter ">
             Postuler </button>
-        <button (click)="onCancel()" class="btn-outline-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
+        <button [routerLink]="['/sujets']" class="btn-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button>
+        <!-- <button (click)="onCancel()" class="btn-outline-success quitter"><i class="fa fa-reply" aria-hidden="true"></i></button> -->
         <button *ngIf="owner(sujet)" (click)="deleteSujet()" class="btn btn-outline-danger fa fa-trash"> </button>
     </div><br><br><br>
     <ng-template class="row" #candidat>
@@ -20,17 +21,24 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     <tr *ngFor="let personnel of personnelPostuler | paginate:{itemsPerPage: 4, currentPage: p }">
                         <td>{{sujet.id}} </td>
                         <td>{{personnel.prenom}} {{personnel.nom}} </td>
                         <td>{{personnel.telephon}}</td>
-                        <td>{{personnel.email}}</td>
+                        <td>{{personnel.email}}
+                        </td>
                         <td *ngIf="owner(sujet)"><button class="motivation btn btn-success" (click)="openMotivation(personnel)"><a><span class="fa fa-eye "></span></a></button>
-                            <button class="btn btn-outline-primary" (click)="openCv(personnel)"><a><span class="fa fa-eye "></span></a></button>
+                            <button class="btn btn-outline-primary">
+                             <a onclick="window.open(this.href);return false" href="{{personnel.imgUrl}}"><span class="fa fa-eye "></span></a>
+                            </button>
+
                         </td>
                         <td *ngIf="owner(sujet)"><button [ngClass]="personnel.accorde?'btn btn-outline-success':'btn btn-outline-danger'" class="btn btn-outline-primary" (click)="accorderSujet(personnel)">
                             <a><span *ngIf="personnel.accorde">Accorder</span>
-                                <span *ngIf="!personnel.accorde">Non Accorder</span></a></button></td>
+                                <span *ngIf="!personnel.accorde">Non Accorder</span></a></button>
+                            <!-- <embed src="http://127.0.0.1:8000/media/file/4/mo1.PNG" width=800 height=500 type='application/pdf' /> -->
+                        </td>
                     </tr>
                 </tbody>
             </table>

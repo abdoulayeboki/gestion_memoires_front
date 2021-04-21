@@ -41,7 +41,7 @@
                                             <td><button class=" btn btn-success" (click)="openDescription(sujet.description)"><a>
                                                 <span class="fa fa-eye "></span></a></button>
                                             </td>
-                                            <td>{{sujet.personnel?.nom}} </td>
+                                            <td> {{sujet.personnel?.prenom}} {{sujet.personnel?.nom}} </td>
                                             <td>{{sujet.createdDate | date:"medium"}}</td>
                                             <td>{{sujet.etatSujet}}</td>
                                             <td>

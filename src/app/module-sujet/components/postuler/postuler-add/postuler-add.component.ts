@@ -26,7 +26,7 @@ export class PostulerAddComponent implements OnInit {
     console.log(this.idSujet)
     this.postulerFormGroup =this.fb.group ({
       motivation: ["", Validators.required],
-      file_cv:[null],
+      file_cv:[null, Validators.required],
       sujet:[this.idSujet,Validators.required]
     })
   }

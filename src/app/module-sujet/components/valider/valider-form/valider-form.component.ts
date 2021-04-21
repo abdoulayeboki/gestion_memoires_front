@@ -42,6 +42,7 @@ export class ValiderFormComponent implements OnInit {
   onSubmit() {
     console.log(this.form?.controls.idPersonnel.value)
     let listPerson = this.form?.controls.idPersonnel.value
+    console.log(this.idSujet)
     for (let idPerson of listPerson) {
       this.postulerService.postValiderSujets({ "sujet": this.idSujet, "personnel": +idPerson }).subscribe(
         (data) => {
