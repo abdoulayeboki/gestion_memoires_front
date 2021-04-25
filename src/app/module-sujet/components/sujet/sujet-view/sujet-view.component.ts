@@ -4,12 +4,13 @@ import { Sujet } from '../../../models/sujet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../../../../core/services/auth-service.service';
 import { Personnel } from '../../../../administration/models/personnel';
-import { concatMap, concatMapTo, map } from 'rxjs/operators';
+import { concatMap, concatMapTo, map, startWith, catchError } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalPostulerComponent } from '../../postuler/modal-postuler/modal-postuler.component';
 import { PostulerService } from '../../../services/postuler.service';
 import { Postuler } from '../../../models/postuler';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, of } from 'rxjs';
+import { AppDataState, DataStateEnum } from '../../../../core/models/app-data-state';
 
 @Component({
   selector: 'app-sujet-view',
@@ -25,7 +26,9 @@ export class SujetViewComponent implements OnInit {
   p:number=1;
   accorde: boolean = false
   sujetValide: boolean = false;
-  imgUrl: string=""
+  imgUrl: string = "";
+  accorder$:  Observable<AppDataState<any>> | undefined
+  readonly DataStateEnum = DataStateEnum;
   constructor(
     private sujetService: SujetService,
     private activatedRoute: ActivatedRoute,
@@ -123,30 +126,68 @@ export class SujetViewComponent implements OnInit {
  
 
   accorderSujet(personnel: Personnel) {
+    // if (!personnel.accorde) {
+    // if(confirm("Etes vous sûr de lui accorde ce sujet"))
+    // this.postulerService.postAccorderSujets(this.sujet?.id, personnel.id).subscribe(
+    //   () => {
+    //     // this.ngOnInit()
+    //     alert("Success: le sujet à bien été accordé")
+    //     window.location.reload();
+    //   },
+    //   error =>alert("Erreur: ce sujet a été dèjà accordé")
+    // )
+    // } else {
+    //   if (confirm("Etes vous sûr d'annuler"))
+    //     this.postulerService.getAccorderBySujetAndPersonnel(this.sujet?.id, personnel.id).pipe(
+    //     ).subscribe(
+    //       (postuler: Postuler[]) => {
+    //         this.postulerService.deleteAccorderSujets(postuler[0]).subscribe(
+    //           () => {
+    //             // this.ngOnInit();
+    //             alert("Success: accord annulé")
+    //             window.location.reload();
+    //           }
+    //         )
+    //     }
+    //     )
+
     if (!personnel.accorde) {
-    if(confirm("Etes vous sûr de lui accorde ce sujet"))
-    this.postulerService.postAccorderSujets(this.sujet?.id, personnel.id).subscribe(
-      () => {
-        // this.ngOnInit()
-        alert("Success: le sujet à bien été accordé")
-        window.location.reload();
-      },
-      error =>alert("Erreur: ce sujet a été dèjà accordé")
-    )
-    } else {
-      if (confirm("Etes vous sûr d'annuler"))
-        this.postulerService.getAccorderBySujetAndPersonnel(this.sujet?.id, personnel.id).pipe(
-        ).subscribe(
-          (postuler: Postuler[]) => {
-            this.postulerService.deleteAccorderSujets(postuler[0]).subscribe(
-              () => {
-                // this.ngOnInit();
-                alert("Success: accord annulé")
-                window.location.reload();
-              }
-            )
-        }
-      )
+      if(confirm("Etes vous sûr de lui accorde ce sujet"))
+      // this.postulerService.postAccorderSujets(this.sujet?.id, personnel.id).subscribe(
+      //   () => {
+      //     // this.ngOnInit()
+      //     alert("Success: le sujet à bien été accordé")
+      //     window.location.reload();
+      //   },
+      //   error =>alert("Erreur: ce sujet a été dèjà accordé")
+      //   )
+        this.accorder$ =  this.postulerService.postAccorderSujets(this.sujet?.id, personnel.id).pipe(
+          map((data) => {
+            setTimeout(() => { this.accorder$ = undefined; this.router.navigate(['sujets']) }, 5000)
+            return ({ dataState: DataStateEnum.LOADED, data: data})
+          }),
+          startWith({ dataState: DataStateEnum.LOADING }),
+          catchError((error) => {
+            // setTimeout(() => { this.accorder$ = undefined;window.location.reload(); }, 5000);
+            return of({ dataState: DataStateEnum.ERROR, errorMessage: error })
+          })
+        )
+      } else {
+        if (confirm("Etes vous sûr d'annuler"))
+          this.postulerService.getAccorderBySujetAndPersonnel(this.sujet?.id, personnel.id).pipe(
+          ).subscribe(
+            (postuler: Postuler[]) => {
+              this.postulerService.deleteAccorderSujets(postuler[0]).subscribe(
+                () => {
+                  // this.ngOnInit();
+                  alert("Success: accord annulé")
+                  window.location.reload();
+                }
+              )
+          }
+          )
+      
+        
     }
     
     

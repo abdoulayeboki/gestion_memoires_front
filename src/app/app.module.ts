@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './core/login/login.component';
 import { AuthInterceptorService } from './core/services/auth-interceptor.service';
 import {  ErrorInterceptorService } from './core/services/error-interceptor.service';
+import { LoadingComponent } from './administration/components/loading/loading.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {  ErrorInterceptorService } from './core/services/error-interceptor.serv
     SidebarComponent,
     DefaultComponent,
     LoginComponent,
+    // LoadingComponent,
   ],
   imports: [
     BrowserModule,

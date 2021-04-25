@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SujetService } from '../../../services/sujet.service';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { AppDataState, DataStateEnum } from '../../../../core/models/app-data-state';
+import { catchError, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sujet-add',
@@ -10,7 +13,9 @@ import { Router } from '@angular/router';
 })
 export class SujetAddComponent implements OnInit {
   sujetFormGroup?: FormGroup;
-  submitted:boolean=false;
+  submitted: boolean = false;
+  sujet$: Observable<AppDataState<any>> | undefined
+  readonly DataStateEnum = DataStateEnum;
   constructor(
     private fb: FormBuilder,
     private sujetService: SujetService,
@@ -26,15 +31,16 @@ export class SujetAddComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.sujetFormGroup?.invalid) return;
-    console.log(this.sujetFormGroup?.value)
-    this.sujetService.postSujets(this.sujetFormGroup?.value)
-      .subscribe((data)=>{
-        alert("Success: sujet enregistre");
+    this.sujet$ = this.sujetService.postSujets(this.sujetFormGroup?.value).pipe(
+      map((data) => {
+        setTimeout(() => this.sujet$ = undefined, 10000)
+        this.sujetFormGroup?.reset()
         this.submitted = false;
-        this.sujetFormGroup?.reset();
-      },
-      // error => console.log(error)
-    );
+        return ({ dataState: DataStateEnum.LOADED, data: data})
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error }))
+    )
   }
   onCancel() {
     this.router.navigate(['sujets'])

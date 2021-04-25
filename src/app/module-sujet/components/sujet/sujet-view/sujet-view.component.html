@@ -1,3 +1,14 @@
+<ng-container *ngIf="(accorder$ | async) as result" [ngSwitch]="result.dataState">
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+        <div class="sk-spinner sk-spinner-rotating-plane"></div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+        <div class="alert alert-danger"> {{result.errorMessage}} </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+        <div class="alert alert-success"> Vous avez accordé à ce sujet</div>
+    </ng-container>
+</ng-container>
 <div *ngIf="sujet" class="col-lg-12">
     <div class="ibox-tools">
         <button *ngIf="peutPostuler(sujet)" [routerLink]="['/sujets/postuler_add', sujet.id]" class="btn btn-outline-primary quitter ">

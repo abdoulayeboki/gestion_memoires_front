@@ -18,10 +18,11 @@ import { ListAccorderComponent } from './components/accorder/list-accorder/list-
 import { MesSujetsComponent } from './components/sujet/mes-sujets/mes-sujets.component';
 import { ValiderFormComponent } from './components/valider/valider-form/valider-form.component';
 import { SujetValiderComponent } from './components/valider/sujet-valider/sujet-valider.component';
+import { LoadingSujetComponent } from './components/loading-sujet/loading-sujet.component';
 
 
 @NgModule({
-  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent,SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent,ModalPostulerComponent, ListAccorderComponent, MesSujetsComponent, ValiderFormComponent, SujetValiderComponent],
+  declarations: [SujetComponent, SujetNavbarComponent, SujetListComponent,SujetAddComponent, SujetEditComponent, SujetViewComponent, PostulerAddComponent,ModalPostulerComponent, ListAccorderComponent, MesSujetsComponent, ValiderFormComponent, SujetValiderComponent, LoadingSujetComponent],
   imports: [
     CommonModule,
     ModuleSujetRoutingModule,

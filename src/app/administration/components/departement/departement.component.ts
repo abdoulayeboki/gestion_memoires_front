@@ -30,7 +30,7 @@ export class DepartementComponent implements OnInit {
           return ({ dataState: DataStateEnum.LOADED, data: data })
         }),
         startWith({dataState: DataStateEnum.LOADING}),
-        catchError( (error) =>of( {dataState: DataStateEnum.ERROR, errorMessage:error.message}))
+        catchError( (error) =>of( {dataState: DataStateEnum.ERROR, errorMessage:error}))
     ) 
     ; 
   }

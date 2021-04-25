@@ -4,17 +4,22 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthServiceService } from './auth-service.service';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class ErrorInterceptorService implements HttpInterceptor {
-    constructor(private authenticationService: AuthServiceService) { }
+    constructor(
+        private authenticationService: AuthServiceService,
+        private router: Router,
+    ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
-            if ([401, 403].includes(err.status) && this.authenticationService.currentUser) {
+            if ([401].includes(err.status) && this.authenticationService.currentUser) {
                 // auto logout if 401 or 403 response returned from api
                 this.authenticationService.logout();
+                this.router.navigate(['login'])
             }
 
             const error = (err && err.error && err.error.message) || err.statusText;

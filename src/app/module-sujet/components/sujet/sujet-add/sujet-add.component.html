@@ -1,4 +1,16 @@
+<ng-container *ngIf="(sujet$ | async) as result" [ngSwitch]="result.dataState">
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+        <app-loading-sujet></app-loading-sujet>
+    </ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+        <div class="alert alert-danger"> {{result.errorMessage}} , service inaccessible</div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+        <div class="alert alert-success"> Sujet enregistre avec success</div>
+    </ng-container>
+</ng-container>
 <div class="ibox-content" *ngIf="sujetFormGroup">
+
     <form [formGroup]="sujetFormGroup" (ngSubmit)="onSubmit()">
         <div class="form-group  row"><label class="col-sm-2 col-form-label">Titre</label>
             <div class="col-sm-10">

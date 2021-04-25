@@ -15,12 +15,13 @@ import { SpecialiteService } from './services/specialite.service';
 import { ClasseService } from './services/classe.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 @NgModule({
   declarations: [
     EtudiantComponent, EnseignentComponent, DepartementComponent, FiliereComponent,
-    SpecialiteComponent, ClasseComponent],
+    SpecialiteComponent, ClasseComponent,LoadingComponent,],
   imports: [
     CommonModule,
     AdministrationRoutingModule,

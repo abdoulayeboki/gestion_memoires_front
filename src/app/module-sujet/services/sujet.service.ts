@@ -58,6 +58,10 @@ export class SujetService {
   updateSujet(sujet: Sujet): Observable<Sujet> {
     return this.http.put<Sujet>(`${environment.apiUrl}/sujets/${sujet.id}/`,sujet)
   }
+  updateSujetTermine(sujet: Sujet): Observable<Sujet> {
+    sujet.etatSujet = "TERMINE"
+    return this.http.put<Sujet>(`${environment.apiUrl}/sujets/termine/${sujet.id}/`,sujet)
+  }
   getPersonnelByUser(id?: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/administration/personnels/?user=${id}`)
   }

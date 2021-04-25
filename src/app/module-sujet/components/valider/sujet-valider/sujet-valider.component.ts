@@ -8,6 +8,7 @@ import { AuthServiceService } from '../../../../core/services/auth-service.servi
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { concatMap, map, startWith, catchError } from 'rxjs/operators';
 import { ModalPostulerComponent } from '../../postuler/modal-postuler/modal-postuler.component';
+import { Sujet } from '../../../models/sujet';
 
 @Component({
   selector: 'app-sujet-valider',
@@ -20,7 +21,11 @@ export class SujetValiderComponent implements OnInit {
   readonly DataStateEnum = DataStateEnum;
   personnel?:Personnel;
   p: number = 1;
+  error=false;
+  success = false;
   search = new FormControl('');
+  errorMessage: string = "";
+  successMessage: string = "";
   constructor(
     private sujetService: SujetService,
     private authService: AuthServiceService,
@@ -37,7 +42,7 @@ export class SujetValiderComponent implements OnInit {
         return ({ dataState: DataStateEnum.LOADED, data: data })
       }),
       startWith({ dataState: DataStateEnum.LOADING }),
-      catchError((error) => of({ dataState: DataStateEnum.ERROR, errorMessage: error.message }))
+      catchError((error) => of({ dataState: DataStateEnum.ERROR, errorMessage: error }))
     );
   }
 
@@ -46,4 +51,13 @@ export class SujetValiderComponent implements OnInit {
         modalRef.componentInstance.titre = "Description";
         modalRef.componentInstance.motivation = description;
   }
+
+  terminerSujet(sujet: Sujet) {
+    if(confirm('Etes-vous sûr?'))
+    this.sujetService.updateSujetTermine(sujet).subscribe(
+      (data) => { this.success=true, this.successMessage =data.titre,setTimeout(() =>  this.success=false, 5000);},//alert("success"),
+      (error) => { this.error = true, this.errorMessage =error,setTimeout(() =>  this.error =false, 5000); }
+    )
+  }
+  
 }

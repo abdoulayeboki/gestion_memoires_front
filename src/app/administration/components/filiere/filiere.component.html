@@ -41,7 +41,7 @@
                     </div>
                     <ng-container *ngIf="(filieres | async) as result" [ngSwitch]="result.dataState">
                         <ng-container *ngSwitchCase="DataStateEnum.LOADING">
-                            Loading .....
+                            <app-loading></app-loading>
                         </ng-container>
                         <ng-container *ngSwitchCase="DataStateEnum.ERROR">
                             <div class="alert alert-danger"> {{result.errorMessage}} </div>

@@ -1,6 +1,6 @@
 <ng-container *ngIf="(sujets$ | async) as result" [ngSwitch]="result.dataState">
     <ng-container *ngSwitchCase="DataStateEnum.LOADING">
-        Loading .....
+        <app-loading-sujet></app-loading-sujet>
     </ng-container>
     <ng-container *ngSwitchCase="DataStateEnum.ERROR">
         <div class="alert alert-danger"> {{result.errorMessage}} </div>

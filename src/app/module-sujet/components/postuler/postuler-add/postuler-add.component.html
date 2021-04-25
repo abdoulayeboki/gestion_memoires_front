@@ -1,3 +1,14 @@
+<ng-container *ngIf="(postuler$ | async) as result" [ngSwitch]="result.dataState">
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+        <app-loading-sujet></app-loading-sujet>
+    </ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+        <div class="alert alert-danger"> {{result.errorMessage}} , Vous postulé à ce sujet</div>
+    </ng-container>
+    <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+        <div class="alert alert-success"> Vous avez postuler avec success</div>
+    </ng-container>
+</ng-container>
 <div class="ibox-content" *ngIf="postulerFormGroup">
     <form [formGroup]="postulerFormGroup" (ngSubmit)="onSubmit()">
         <div class="form-group  row"><label class="col-sm-2 col-form-label">CV</label>

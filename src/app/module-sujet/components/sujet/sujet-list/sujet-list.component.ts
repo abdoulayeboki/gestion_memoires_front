@@ -70,7 +70,7 @@ export class SujetListComponent implements OnInit {
         return ({ dataState: DataStateEnum.LOADED, data: data})
       }),
       startWith({ dataState: DataStateEnum.LOADING }),
-      catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
+      catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error }))
     )
   }
   getSujetByProfil(profil: string) {
@@ -79,7 +79,7 @@ export class SujetListComponent implements OnInit {
         return ({ dataState: DataStateEnum.LOADED, data: data})
       }),
       startWith({ dataState: DataStateEnum.LOADING }),
-      catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error.message }))
+      catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error }))
     )
   }
   onActionEvent($event: EvenementSujet) {

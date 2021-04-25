@@ -2,11 +2,12 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
-
+                <div *ngIf="success" class="alert alert-success">le sujet {{successMessage}} a été cloturé avec success </div>
+                <div *ngIf="error" class="alert alert-danger"> {{errorMessage}} ! veuillez verifier si vous avez le droit de cloturer le sujet </div>
                 <div class="ibox-content">
                     <ng-container *ngIf="(sujets$ | async) as result" [ngSwitch]="result.dataState">
                         <ng-container *ngSwitchCase="DataStateEnum.LOADING">
-                            Loading .....
+                            <app-loading-sujet></app-loading-sujet>
                         </ng-container>
                         <ng-container *ngSwitchCase="DataStateEnum.ERROR">
                             <div class="alert alert-danger"> {{result.errorMessage}} </div>
@@ -31,7 +32,8 @@
                                             <th>Proprietaire</th>
                                             <th>Date creation</th>
                                             <th>Etat du sujet</th>
-                                            <th>Personnel Accorde</th>
+                                            <th>Encadreur/Etudiants</th>
+                                            <th>Terminé le sujet</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,6 +50,9 @@
                                                 <ul *ngFor="let p of sujet.personnelValider">
                                                     <li>{{p.prenom}} {{p.nom}}</li>
                                                 </ul>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-success btn-sm" (click)="terminerSujet(sujet)">terminer</button>
                                             </td>
                                         </tr>
                                     </tbody>

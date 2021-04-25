@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PostulerService } from 'src/app/module-sujet/services/postuler.service';
+import { Observable, of } from 'rxjs';
+import { DataStateEnum, AppDataState } from '../../../../core/models/app-data-state';
+import { map, startWith, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-postuler-add',
@@ -12,7 +15,9 @@ export class PostulerAddComponent implements OnInit {
 
   postulerFormGroup?: FormGroup;
   submitted: boolean = false;
-  idSujet: number=0
+  idSujet: number = 0
+  postuler$: Observable<AppDataState<any>> | undefined
+  readonly DataStateEnum = DataStateEnum;
   constructor(
     private fb: FormBuilder,
     private postulerService: PostulerService,
@@ -45,25 +50,20 @@ export class PostulerAddComponent implements OnInit {
     formData.append('file_cv', this.postulerFormGroup?.get('file_cv')?.value);
     formData.append('motivation', this.postulerFormGroup?.get('motivation')?.value);
     formData.append('sujet', this.postulerFormGroup?.get('sujet')?.value);
-    this.postulerService.postPostulerSujets(formData)
-      .subscribe((data)=>{
-        alert("Success:vous avez postuler ");
-        this.router.navigate(['sujets'])
-      },
-      error =>alert("Erreur: Vous avez dèjà postulé à ce sujet")
-    );
+    this.postuler$ = this.postulerService.postPostulerSujets(formData).pipe(
+      map((data) => {
+        setTimeout(() => { this.postuler$ = undefined; this.router.navigate(['sujets']) }, 5000)
+        this.submitted = false;
+        return ({ dataState: DataStateEnum.LOADED, data: data})
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError((error) => {
+        setTimeout(() => { this.postuler$ = undefined; this.router.navigate(['sujets']) }, 5000);
+        return of({ dataState: DataStateEnum.ERROR, errorMessage: error })
+      })
+    )
   }
-  // onSubmit() {
-  //   this.submitted = true;
-  //   if (this.postulerFormGroup?.invalid) return;
-  //   this.postulerService.postPostulerSujets(this.postulerFormGroup?.value)
-  //     .subscribe((data)=>{
-  //       alert("Success:vous avez postuler ");
-  //       this.router.navigate(['sujets'])
-  //     },
-  //     error =>alert("Erreur: Vous avez dèjà postulé à ce sujet")
-  //   );
-  // }
+
   onCancel() {
     this.router.navigate(['sujets'])
   }
