@@ -163,7 +163,7 @@ export class SujetViewComponent implements OnInit {
       //   )
         this.accorder$ =  this.postulerService.postAccorderSujets(this.sujet?.id, personnel.id).pipe(
           map((data) => {
-            setTimeout(() => { this.accorder$ = undefined; this.router.navigate(['sujets']) }, 5000)
+            setTimeout(() => { this.accorder$ = undefined; this.getData()}, 3000)
             return ({ dataState: DataStateEnum.LOADED, data: data})
           }),
           startWith({ dataState: DataStateEnum.LOADING }),
@@ -181,7 +181,8 @@ export class SujetViewComponent implements OnInit {
                 () => {
                   // this.ngOnInit();
                   alert("Success: accord annulé")
-                  window.location.reload();
+                  this.getData()
+                  // window.location.reload();
                 }
               )
           }

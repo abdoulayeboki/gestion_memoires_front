@@ -52,6 +52,7 @@ export class PostulerAddComponent implements OnInit {
     formData.append('sujet', this.postulerFormGroup?.get('sujet')?.value);
     this.postuler$ = this.postulerService.postPostulerSujets(formData).pipe(
       map((data) => {
+        this.postulerFormGroup?.reset()
         setTimeout(() => { this.postuler$ = undefined; this.router.navigate(['sujets']) }, 5000)
         this.submitted = false;
         return ({ dataState: DataStateEnum.LOADED, data: data})

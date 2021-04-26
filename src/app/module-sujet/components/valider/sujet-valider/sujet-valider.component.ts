@@ -55,7 +55,7 @@ export class SujetValiderComponent implements OnInit {
   terminerSujet(sujet: Sujet) {
     if(confirm('Etes-vous sûr?'))
     this.sujetService.updateSujetTermine(sujet).subscribe(
-      (data) => { this.success=true, this.successMessage =data.titre,setTimeout(() =>  this.success=false, 5000);},//alert("success"),
+      (data) => { this.success = true, this.successMessage = data.titre, setTimeout(() => { this.success = false; this.getSujetValider() }, 5000);},//alert("success"),
       (error) => { this.error = true, this.errorMessage =error,setTimeout(() =>  this.error =false, 5000); }
     )
   }
