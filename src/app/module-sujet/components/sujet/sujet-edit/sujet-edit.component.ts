@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, startWith } from 'rxjs/operators';
 import { SujetService } from '../../../services/sujet.service';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
+import { AppDataState, DataStateEnum } from '../../../../core/models/app-data-state';
 
 @Component({
   selector: 'app-sujet-edit',
@@ -14,7 +15,9 @@ export class SujetEditComponent implements OnInit, OnDestroy {
   sujetId: number =0;
   sub: any;
   sujetFormGroup?:FormGroup;
-  submitted:boolean=false;
+  submitted: boolean = false;
+  sujet$: Observable<AppDataState<any>> | undefined
+  readonly DataStateEnum = DataStateEnum;
   constructor(private activatedRoute:ActivatedRoute,
               private sujetService:SujetService,
               private router: Router,
@@ -40,12 +43,15 @@ export class SujetEditComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.submitted = true;
     if (this.sujetFormGroup?.invalid) return;
-    this.sujetService.updateSujet(this.sujetFormGroup?.value)
-      .subscribe(data=>{
-        alert("Success Saving product");
-        this.router.navigate(['sujets'])
-        }
-      );
+    this.sujet$ = this.sujetService.updateSujet(this.sujetFormGroup?.value).pipe(
+      map((data) => {
+        setTimeout(() => { this.sujet$ = undefined; this.router.navigate(['sujets']) }, 5000)
+        this.submitted = false;
+        return ({ dataState: DataStateEnum.LOADED, data: data})
+      }),
+      startWith({ dataState: DataStateEnum.LOADING }),
+      catchError((error) =>  of({dataState: DataStateEnum.ERROR,errorMessage:error }))
+    )
   }
   onCancel() {
     this.router.navigate(['sujets'])
